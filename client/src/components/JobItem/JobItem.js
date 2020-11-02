@@ -1,0 +1,33 @@
+import moment from "moment";
+import Card from "react-bootstrap/Card";
+import { JobTags } from "./JobTags";
+import "./JobItem.scss";
+
+export function JobItem({ job }) {
+  const { title, postedBy, salary, tags, postedOn, url } = job;
+  const postedOnStr = moment(postedOn).fromNow();
+
+  return (
+    <Card className="jobItem">
+      <Card.Body>
+        <div className="jobItem__header mb-2">
+          <Card.Title className="jobItem__title mb-0">
+            <a href={url} target="_blank" rel="noreferrer">
+              {title}
+            </a>
+          </Card.Title>
+          <small>{postedOnStr}</small>
+        </div>
+
+        <Card.Subtitle className="jobItem__postedBy">{postedBy}</Card.Subtitle>
+        {salary && <Card.Text className="jobItem__salary">{salary}</Card.Text>}
+      </Card.Body>
+
+      {tags.length > 0 && (
+        <Card.Footer className="jobItem__footer">
+          <JobTags tags={tags} />
+        </Card.Footer>
+      )}
+    </Card>
+  );
+}

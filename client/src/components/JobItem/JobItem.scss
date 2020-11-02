@@ -1,0 +1,28 @@
+.jobItem {
+  background-color: #302f2f;
+
+  &:hover {
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 3px -2px,
+      rgba(0, 0, 0, 0.14) 0px 3px 4px 0px, rgba(0, 0, 0, 0.12) 0px 1px 8px 0px;
+  }
+
+  &__header {
+    display: grid;
+    grid-template-columns: 1fr max-content;
+    grid-column-gap: 10px;
+  }
+
+  &__footer {
+    background-color: transparent;
+    border-top: 0;
+  }
+
+  &__title a {
+    color: inherit;
+  }
+
+  &__postedBy,
+  &__salary {
+    color: rgba($color: #fff, $alpha: 0.6);
+  }
+}

@@ -1,0 +1,10 @@
+.header {
+  height: 65px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba($color: #fff, $alpha: 0.06);
+
+  &__title {
+    font-size: 1rem;
+  }
+}
