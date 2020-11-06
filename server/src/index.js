@@ -4,27 +4,28 @@ const cors = require('cors');
 const express = require('express');
 const helmet = require('helmet');
 const morgan = require('morgan');
-require('dotenv').config();
+const dotenv = require('dotenv');
 
 const { getJobs } = require('./db');
 
-const app = express();
-app.use(helmet());
-app.use(morgan('common'));
-app.use(express.json());
-app.use(cors({ origin: process.env.ALLOWED_ORIGINS.split(',') }));
+dotenv.config();
 
 const port = process.env.PORT || 5000;
-const clientPath = path.resolve('../client/build/');
+const clientPath = path.join(__dirname, '../../client/build');
+const clientIndex = path.join(clientPath, 'index.html');
 
-app.listen(port, () => {
-  console.log(`Listening on http://localhost:${port}...`);
+const app = express();
+app.use(express.json());
+app.use(cors());
+app.use(helmet());
+app.use(morgan('common'));
+app.use(express.static(clientPath));
+
+app.get('/', (req, res) => {
+  res.sendFile(clientIndex);
 });
 
-app.use(express.static(clientPath));
-app.get('/', (req, res) => res.sendFile(clientPath));
-
-app.get('/v1/jobs', async (req, res, next) => {
+app.get('/api/jobs', async (req, res, next) => {
   try {
     const jobs = await getJobs();
     res.json({ data: jobs });
@@ -33,18 +34,10 @@ app.get('/v1/jobs', async (req, res, next) => {
   }
 });
 
-app.use((req, res, next) => {
-  const error = new Error(`Not Found - ${req.originalUrl}`);
-  res.status(404);
-  next(error);
+app.get('*', (req, res) => {
+  res.sendFile(clientIndex);
 });
 
-// eslint-disable-next-line no-unused-vars
-app.use((error, req, res, next) => {
-  const statusCode = res.statusCode === 200 ? 500 : res.statusCode;
-  res.status(statusCode);
-  res.json({
-    message: error.message,
-    ...(process.NODE_ENV !== 'production' && { stack: error.stack }),
-  });
+app.listen(port, () => {
+  console.log(`🌍 Serving app on port ${port}...`);
 });

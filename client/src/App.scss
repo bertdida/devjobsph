@@ -1,12 +1,39 @@
 body {
-  background-color: #222323;
-  color: rgba($color: #fff, $alpha: 0.87);
+  --max-width: 700px;
+  --header-height: 65px;
+  --footer-height: var(--header-height);
+  --background-color: #f4f4f4;
+  --foreground-color: #333;
+  --card-background-color: #fff;
+  --card-foreground-secondary-color: #6c757d;
+  --border-color: rgba(0, 0, 0, 0.1);
+  --svg-color: #333;
+
+  &[data-theme="dark"] {
+    --background-color: #222323;
+    --foreground-color: rgba(255, 255, 255, 0.87);
+    --border-color: rgba(255, 255, 255, 0.06);
+    --card-background-color: #302f2f;
+    --card-foreground-secondary-color: rgba(255, 255, 255, 0.6);
+    --svg-color: #fff;
+  }
+
+  background-color: var(--background-color);
+  color: var(--foreground-color);
 }
 
 .app {
-  max-width: 700px;
+  max-width: var(--max-width);
 }
 
 .main {
-  margin-top: 30px;
+  --vertical-margin: 30px;
+  margin-top: var(--vertical-margin);
+  margin-bottom: var(--vertical-margin);
+}
+
+.jobList {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
 }

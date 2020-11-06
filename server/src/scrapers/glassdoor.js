@@ -16,8 +16,17 @@ async function scrapeJobs(jobTitle) {
     return jobs;
   }
 
-  const promises = jobs.map(async (job) => ({ ...job, tags: await scrapeJobTags(job) }));
-  return Promise.all(promises);
+  // we use for loop below to avoid MaxListenersExceededWarning
+  // https://stackoverflow.com/a/46297546/8062659
+
+  const jobsWithTags = [];
+  for (let index = 0; index < jobs.length; index += 1) {
+    const job = jobs[index];
+    const tags = await scrapeJobTags(job); // eslint-disable-line no-await-in-loop
+    jobsWithTags.push({ ...job, tags });
+  }
+
+  return jobsWithTags;
 }
 
 function getPageUrl({ title: titleParam, lastDays = 1, remoteOnly = true }) {
@@ -68,7 +77,13 @@ async function scrapeJobsRecursively(url, results = [], page = 1) {
 async function scrapeJobTags({ url }) {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
-  await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 0 });
+
+  try {
+    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 0 });
+  } catch (error) {
+    await browser.close();
+    return [];
+  }
 
   const description = await page.evaluate(() => {
     const target = document.getElementById('JobDescriptionContainer');

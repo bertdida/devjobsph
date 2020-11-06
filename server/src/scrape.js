@@ -3,7 +3,11 @@ const { glassdoor } = require('./scrapers');
 const { onlinejobs } = require('./scrapers');
 const { saveJobs } = require('./db');
 
-const JOB_TITLE = 'software developer';
+const JOB_TITLES = [
+  'software engineer',
+  'software developer',
+  'web developer',
+];
 
 const functions = [
   indeed.scrapeJobs,
@@ -12,10 +16,14 @@ const functions = [
 ];
 
 async function scrapeJobs() {
-  const results = await Promise.all(functions.map((func) => func(JOB_TITLE)));
+  let promises = [];
+  JOB_TITLES.forEach((title) => {
+    promises = [...promises, ...functions.map((func) => func(title))];
+  });
+
+  const results = await Promise.all(promises);
   const jobs = results.reduce((carry, result) => [...carry, ...result], []);
-  // saveJobs(jobs);
-  console.log(jobs);
+  saveJobs(jobs);
 }
 
 scrapeJobs();

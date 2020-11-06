@@ -7,7 +7,13 @@
 
   &--showHidden {
     .jobTags__listItem {
-      display: block;
+      display: inline-block;
+    }
+
+    .jobTags__showMore {
+      outline: 0;
+      opacity: 0;
+      pointer-events: none;
     }
   }
 
@@ -21,19 +27,18 @@
     padding: 0;
     margin: 0;
     list-style-type: none;
-    display: flex;
-    align-items: center;
   }
 
   &__listItem {
+    display: inline-block;
     padding: 0 8px;
     border-radius: 20px;
     font-size: var(--font-size);
     font-weight: 500;
     text-align: center;
     max-width: fit-content;
-    background-color: var(--background-color, rgb(242, 242, 242));
-    color: var(--color, rgb(101, 101, 101));
+    background-color: var(--my-background-color, rgb(242, 242, 242));
+    color: var(--my-color, rgb(101, 101, 101));
 
     &--isHidden {
       display: none;
@@ -49,107 +54,108 @@
     }
 
     &[data-value="php" i] {
-      --background-color: #4f5d95;
-      --color: #fff;
+      --my-background-color: #4f5d95;
+      --my-color: #fff;
     }
 
     &[data-value="javascript" i] {
-      --background-color: #f1e05a;
+      --my-background-color: #f1e05a;
+      --my-color: #333;
     }
 
     &[data-value="html" i] {
-      --background-color: #e44b23;
-      --color: #fff;
+      --my-background-color: #e44b23;
+      --my-color: #fff;
     }
 
     &[data-value="css" i] {
-      --background-color: #563d7c;
-      --color: #fff;
+      --my-background-color: #563d7c;
+      --my-color: #fff;
     }
 
     &[data-value="java" i] {
-      --background-color: #b07219;
-      --color: #fff;
+      --my-background-color: #b07219;
+      --my-color: #fff;
     }
 
     &[data-value="python" i] {
-      --background-color: #3572a5;
-      --color: #fff;
+      --my-background-color: #3572a5;
+      --my-color: #fff;
     }
 
     &[data-value="rails" i] {
-      --background-color: #701516;
-      --color: #fff;
+      --my-background-color: #701516;
+      --my-color: #fff;
     }
 
     &[data-value="asp.net" i] {
-      --background-color: #6a40fd;
-      --color: #fff;
+      --my-background-color: #6a40fd;
+      --my-color: #fff;
     }
 
     &[data-value="typescript" i] {
-      --background-color: #2b7489;
-      --color: #fff;
+      --my-background-color: #2b7489;
+      --my-color: #fff;
     }
 
     &[data-value="laravel" i] {
-      --background-color: #f72517;
-      --color: #fff;
+      --my-background-color: #f72517;
+      --my-color: #fff;
     }
 
     &[data-value="vue.js" i] {
-      --background-color: #3eb280;
-      --color: #fff;
+      --my-background-color: #3eb280;
+      --my-color: #fff;
     }
 
     &[data-value="react" i] {
-      --background-color: #5dd3f3;
-      --color: #302f2f;
+      --my-background-color: #5dd3f3;
+      --my-color: #302f2f;
     }
 
     &[data-value="mongodb" i] {
-      --background-color: #449443;
-      --color: #fff;
+      --my-background-color: #449443;
+      --my-color: #fff;
     }
 
     &[data-value="angularjs" i] {
-      --background-color: #d6012f;
-      --color: #fff;
+      --my-background-color: #d6012f;
+      --my-color: #fff;
     }
 
     &[data-value="mysql" i] {
-      --background-color: #f29111;
-      --color: #fff;
+      --my-background-color: #f29111;
+      --my-color: #fff;
     }
 
     &[data-value="wordpress" i] {
-      --background-color: #00749c;
-      --color: #fff;
+      --my-background-color: #00749c;
+      --my-color: #fff;
     }
 
     &[data-value="shopify" i] {
-      --background-color: #64943e;
-      --color: #fff;
+      --my-background-color: #64943e;
+      --my-color: #fff;
     }
 
     &[data-value="jquery" i] {
-      --background-color: #0868ac;
-      --color: #fff;
+      --my-background-color: #0868ac;
+      --my-color: #fff;
     }
 
     &[data-value="postgresql" i] {
-      --background-color: #33648d;
-      --color: #fff;
+      --my-background-color: #33648d;
+      --my-color: #fff;
     }
 
     &[data-value="aws" i] {
-      --background-color: #252f3e;
-      --color: #fff;
+      --my-background-color: #252f3e;
+      --my-color: #fff;
     }
 
     &[data-value="azure" i] {
-      --background-color: #2171b2;
-      --color: #fff;
+      --my-background-color: #2171b2;
+      --my-color: #fff;
     }
   }
 }

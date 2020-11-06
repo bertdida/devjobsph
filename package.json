@@ -1,0 +1,26 @@
+{
+  "name": "devjobsph",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./server/src/index.js",
+  "scripts": {
+    "start": "cd ./server && npm run start",
+    "server:dev": "cd ./server && npm run dev",
+    "server:scrape": "cd ./server && npm run scrape",
+    "server:lint": "cd ./server && npm run lint",
+    "client:lint": "cd ./client && npm run lint",
+    "client:build": "cd ./client && npm install && npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bertdida/DevJobsPh.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bertdida/DevJobsPh/issues"
+  },
+  "homepage": "https://github.com/bertdida/DevJobsPh#readme"
+}

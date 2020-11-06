@@ -1,12 +1,11 @@
-import { useRef, useState } from "react";
+import { useRef, useState } from 'react';
+import PropTypes from 'prop-types';
 
-import { useOnClickOutside } from "./useOnClickOutside";
-import "./JobTags.scss";
+import './JobTags.scss';
 
 export function JobTags({ tags: tagsProp }) {
   const root = useRef();
   const [showHidden, setShowHidden] = useState(false);
-  useOnClickOutside(root, onClickOutside);
 
   const tags = tagsProp.map((tag, index) => ({
     name: tag,
@@ -20,35 +19,60 @@ export function JobTags({ tags: tagsProp }) {
     setShowHidden(true);
   }
 
-  function onClickOutside() {
+  function onBlur() {
     setShowHidden(false);
+  }
+
+  function onKeyPress(event) {
+    const { which } = event;
+    const enterOrSpace = which === 13 || which === 32;
+
+    if (enterOrSpace) {
+      event.preventDefault();
+      onClick(event);
+    }
   }
 
   return (
     <div
       ref={root}
-      className={`jobTags ${showHidden ? "jobTags--showHidden" : ""}`}
+      className={`jobTags ${showHidden ? 'jobTags--showHidden' : ''}`}
     >
       <List tags={tags} />
 
-      {totalHidden > 0 && !showHidden && (
-        <span className="jobTags__showMore" onClick={onClick}>
-          {totalHidden} more
+      {totalHidden > 0 && (
+        <span
+          role="button"
+          tabIndex={0}
+          onBlur={onBlur}
+          onClick={onClick}
+          onKeyPress={onKeyPress}
+          className="jobTags__showMore"
+        >
+          {`${totalHidden} more`}
         </span>
       )}
     </div>
   );
 }
 
+JobTags.propTypes = {
+  tags: PropTypes.array.isRequired,
+};
+
 function List({ tags }) {
   return (
     <ul className="jobTags__list">
-      {tags.map((tag, index) => (
-        <ListItem key={index} tag={tag} />
+      {tags.map((tag) => (
+        <ListItem key={tag.name} tag={tag} />
       ))}
     </ul>
   );
 }
+
+List.propTypes = {
+  tags: PropTypes.array.isRequired,
+};
 
 function ListItem({ tag }) {
   const { name, isHidden } = tag;
@@ -56,7 +80,7 @@ function ListItem({ tag }) {
   return (
     <li
       className={`jobTags__listItem ${
-        isHidden ? "jobTags__listItem--isHidden" : ""
+        isHidden ? 'jobTags__listItem--isHidden' : ''
       }`}
       data-value={name}
     >
@@ -64,3 +88,7 @@ function ListItem({ tag }) {
     </li>
   );
 }
+
+ListItem.propTypes = {
+  tag: PropTypes.object.isRequired,
+};

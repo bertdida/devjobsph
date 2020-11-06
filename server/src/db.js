@@ -1,8 +1,11 @@
 const firebaseAdmin = require('firebase-admin');
-const firebaseServiceAccount = require('../firebase.json');
+const dotenv = require('dotenv');
 
+dotenv.config();
+
+const firebaseCreds = JSON.parse(process.env.FIREBASE_CREDENTIAL);
 firebaseAdmin.initializeApp({
-  credential: firebaseAdmin.credential.cert(firebaseServiceAccount),
+  credential: firebaseAdmin.credential.cert(firebaseCreds),
 });
 
 const db = firebaseAdmin.firestore();
@@ -22,7 +25,7 @@ async function saveJobs(jobs) {
 async function getJobs() {
   const colRef = db.collection('jobs');
   const snapshot = await colRef.get();
-  return snapshot.docs.map((doc) => doc.data());
+  return snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
 }
 
 module.exports = { saveJobs, getJobs };

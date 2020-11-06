@@ -22,7 +22,7 @@ function formatPostedOn(postedOn) {
     return chrono.parseDate('now');
   }
 
-  if (/^(?:[1-9]|1[0-9]|2[0-4])h$/i.test(postedOn)) {
+  if (/^(?:[1-9]|1[0-9]|2[0-4])h$/i.test(postedOn)) { // matches 1h - 24h case-insensitive
     return chrono.parseDate(`${parseInt(postedOn, 10)} hours ago`);
   }
 

@@ -1,0 +1,29 @@
+.footer {
+  border-top: 1px solid var(--border-color);
+
+  &__inner {
+    height: var(--footer-height);
+    max-width: var(--max-width);
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__title {
+    font-size: 1rem;
+  }
+
+  &__link {
+    --color: var(--svg-color);
+    color: var(--color);
+
+    svg {
+      fill: var(--color);
+    }
+
+    &:hover {
+      color: var(--color);
+    }
+  }
+}

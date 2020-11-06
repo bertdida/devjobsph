@@ -1,10 +1,15 @@
-import moment from "moment";
-import Card from "react-bootstrap/Card";
-import { JobTags } from "./JobTags";
-import "./JobItem.scss";
+import PropTypes from 'prop-types';
+import moment from 'moment';
+import Card from 'react-bootstrap/Card';
+
+import { JobTags } from './JobTags';
+import './JobItem.scss';
 
 export function JobItem({ job }) {
-  const { title, postedBy, salary, tags, postedOn, url } = job;
+  const {
+    title, postedBy, salary, tags, postedOn, url,
+  } = job;
+
   const postedOnStr = moment(postedOn).fromNow();
 
   return (
@@ -23,7 +28,7 @@ export function JobItem({ job }) {
         {salary && <Card.Text className="jobItem__salary">{salary}</Card.Text>}
       </Card.Body>
 
-      {tags.length > 0 && (
+      {tags && tags.length > 0 && (
         <Card.Footer className="jobItem__footer">
           <JobTags tags={tags} />
         </Card.Footer>
@@ -31,3 +36,7 @@ export function JobItem({ job }) {
     </Card>
   );
 }
+
+JobItem.propTypes = {
+  job: PropTypes.object.isRequired,
+};

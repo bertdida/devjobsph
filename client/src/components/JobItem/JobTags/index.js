@@ -1,1 +1,1 @@
-export { JobTags } from "./JobTags";
+export { JobTags } from './JobTags';
