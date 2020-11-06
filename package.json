@@ -5,11 +5,11 @@
   "main": "./server/src/index.js",
   "scripts": {
     "start": "cd ./server && npm run start",
-    "server:dev": "cd ./server && npm run dev",
-    "server:scrape": "cd ./server && npm run scrape",
+    "build": "cd ./client && npm install && npm run build",
+    "dev": "cd ./server && npm run dev",
+    "scrape": "cd ./server && npm run scrape",
     "server:lint": "cd ./server && npm run lint",
     "client:lint": "cd ./client && npm run lint",
-    "client:build": "cd ./client && npm install && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
