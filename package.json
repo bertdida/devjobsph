@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/bertdida/DevJobsPh/issues"
   },
-  "homepage": "https://github.com/bertdida/DevJobsPh#readme"
+  "homepage": "https://github.com/bertdida/DevJobsPh#readme",
+  "engines": {
+    "node": "12.x"
+  }
 }
