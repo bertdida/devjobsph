@@ -5,6 +5,7 @@ const express = require('express');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const dotenv = require('dotenv');
+const compression = require('compression');
 
 const { getJobs } = require('./db');
 
@@ -19,6 +20,7 @@ app.use(express.json());
 app.use(cors());
 app.use(helmet());
 app.use(morgan('common'));
+app.use(compression());
 app.use(express.static(clientPath));
 
 app.get('/', (req, res) => {
