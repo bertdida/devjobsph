@@ -1,23 +1,15 @@
-const { indeed } = require('./scrapers');
-const { glassdoor } = require('./scrapers');
-const { onlinejobs } = require('./scrapers');
+const scraper = require('./scraper');
 const { saveJobs } = require('./db');
 
-const JOB_TITLES = [
-  'software engineer',
-  'software developer',
-  'web developer',
-];
-
 const functions = [
-  indeed.scrapeJobs,
-  glassdoor.scrapeJobs,
-  onlinejobs.scrapeJobs,
+  scraper.indeed.scrapeJobs,
+  scraper.glassdoor.scrapeJobs,
+  scraper.onlinejobs.scrapeJobs,
 ];
 
 async function scrapeJobs() {
   let promises = [];
-  JOB_TITLES.forEach((title) => {
+  scraper.config.searchQueries.forEach((title) => {
     promises = [...promises, ...functions.map((func) => func(title))];
   });
 

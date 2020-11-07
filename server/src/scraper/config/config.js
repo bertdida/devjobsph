@@ -1,6 +1,15 @@
 const tagRegexMap = require('./tag-regex-map');
 
 module.exports = {
+  /** list of job titles to scrape */
+  searchQueries: [
+    'software engineer',
+    'software developer',
+    'web developer',
+    'back end developer',
+    'front end developer',
+  ],
+
   /** the maximum page to scrape */
   maxPage: 1,
 
