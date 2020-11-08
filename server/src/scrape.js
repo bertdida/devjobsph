@@ -15,7 +15,19 @@ async function scrapeJobs() {
 
   const results = await Promise.all(promises);
   const jobs = results.reduce((carry, result) => [...carry, ...result], []);
-  saveJobs(jobs);
+  const uniqueJobs = removeDuplicates(jobs);
+  saveJobs(uniqueJobs);
+}
+
+function removeDuplicates(jobs) {
+  return jobs.filter((job, index, self) => {
+    const { title, postedBy } = job;
+    const titleUpper = title.toUpperCase();
+    const postedByUpper = postedBy.toUpperCase();
+
+    return index === self.findIndex((currJob) => currJob.title.toUpperCase() === titleUpper
+      && currJob.postedBy.toUpperCase() === postedByUpper);
+  });
 }
 
 scrapeJobs();
