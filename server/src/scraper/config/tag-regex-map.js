@@ -7,12 +7,13 @@ module.exports = {
   Swift: /\bswift\b/ig,
   TypeScript: /\btypescript\b/ig,
 
-  'Node.js': /\bnodejs\b/ig,
+  'Node.js': /\bnode(?:\.)?js\b/ig,
 
   Django: /\bdjango\b/ig,
   Flask: /\bflask\b/ig,
   Laravel: /\blaravel\b/ig,
   Rails: /\bruby(?: on rails)?|ror|rails\b/ig,
+  'Express.js': /\bexpress\.js\b/ig,
 
   SQL: /\bsql\b/ig,
   MySQL: /\bmysql\b/ig,
@@ -27,7 +28,7 @@ module.exports = {
 
   HTML: /\bhtml\b/ig,
   CSS: /\bcss(?:3)?\b/ig,
-  jQuery: /\bjQuery\b/ig,
+  jQuery: /\bjquery\b/ig,
   Bootstrap: /\bbootstrap\b/ig,
 
   WordPress: /\bwordpress\b/ig,
