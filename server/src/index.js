@@ -37,8 +37,13 @@ app.get('/api/jobs', async (req, res, next) => {
 
   try {
     const params = await schema.validate(req.query);
-    const jobs = await getJobs({ ...params });
-    res.json({ data: jobs });
+    const { perPage } = params;
+
+    // we are requesting `perPage` + 1 to let our
+    // client know whether the next page is accessible
+
+    const jobs = await getJobs({ ...params, perPage: perPage + 1 });
+    res.json({ data: jobs.slice(0, perPage), hasNext: jobs.length > perPage });
   } catch (error) {
     next(error);
   }
