@@ -16,7 +16,7 @@ export function Footer() {
           <GitHubIcon />
         </a>
 
-        <span>DevJobsPh</span>
+        <span className="footer__title">DevJobsPh</span>
       </Container>
     </Container>
   );
