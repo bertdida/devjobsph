@@ -6,6 +6,7 @@ module.exports = {
     'software engineer',
     'software developer',
     'web developer',
+    'full stack developer',
     'back end developer',
     'front end developer',
   ],
