@@ -22,10 +22,21 @@ async function saveJobs(jobs) {
   await batch.commit();
 }
 
-async function getJobs() {
+async function getJobs({ startAfter, perPage, tag }) {
   const colRef = db.collection('jobs');
-  const snapshot = await colRef.get();
-  return snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+  let query = colRef.orderBy('createdAt').limit(perPage);
+
+  if (tag) {
+    query = query.where('tags', 'array-contains', tag);
+  }
+
+  if (startAfter) {
+    const startAfterDoc = await colRef.doc(startAfter).get();
+    query = query.startAfter(startAfterDoc);
+  }
+
+  const snapshot = await query.get();
+  return snapshot.docs.map((currDoc) => ({ ...currDoc.data(), id: currDoc.id }));
 }
 
 module.exports = { saveJobs, getJobs };

@@ -4,6 +4,7 @@ const cors = require('cors');
 const express = require('express');
 const helmet = require('helmet');
 const morgan = require('morgan');
+const yup = require('yup');
 const dotenv = require('dotenv');
 const compression = require('compression');
 
@@ -28,8 +29,15 @@ app.get('/', (req, res) => {
 });
 
 app.get('/api/jobs', async (req, res, next) => {
+  const schema = yup.object().shape({
+    startAfter: yup.string().nullable().default(null),
+    perPage: yup.number().oneOf([10, 15, 20]).default(10),
+    tag: yup.string().nullable().default(null),
+  });
+
   try {
-    const jobs = await getJobs();
+    const params = await schema.validate(req.query);
+    const jobs = await getJobs({ ...params });
     res.json({ data: jobs });
   } catch (error) {
     next(error);
