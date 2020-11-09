@@ -31,7 +31,7 @@ function Main({ isLoading, jobs }) {
   return (
     <ul className="jobList">
       {jobs.map((job) => (
-        <li className="mb-3" key={job.id}>
+        <li className="mb-3" key={job._id}>
           <JobItem job={job} />
         </li>
       ))}
