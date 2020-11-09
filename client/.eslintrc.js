@@ -25,6 +25,7 @@ module.exports = {
     'react/forbid-prop-types': 'off',
     'no-use-before-define': ['error', { functions: false }],
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
+    'no-underscore-dangle': ['error', { allow: ['_id'] }],
   },
   settings: {
     'import/resolver': {
