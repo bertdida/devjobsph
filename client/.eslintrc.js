@@ -26,6 +26,8 @@ module.exports = {
     'no-use-before-define': ['error', { functions: false }],
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
     'no-underscore-dangle': ['error', { allow: ['_id'] }],
+    camelcase: 'off',
+    'react/jsx-props-no-spreading': 'off',
   },
   settings: {
     'import/resolver': {
