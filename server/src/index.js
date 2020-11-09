@@ -30,7 +30,7 @@ app.get('/', (req, res) => {
 app.get('/api/jobs', async (req, res, next) => {
   const schema = yup.object().shape({
     page: yup.number().positive().required().default(1),
-    perPage: yup.number().oneOf([10, 15, 20]).default(10),
+    perPage: yup.number().oneOf([10, 15, 20]).default(20),
     tag: yup.string().nullable().default(null),
   });
 
