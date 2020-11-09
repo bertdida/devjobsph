@@ -5,7 +5,6 @@ const config = require('./config');
 const { getJobTagsFromString, formatPostedOn } = require('./utils');
 
 const BASE_URL = 'https://ph.indeed.com';
-const SOURCE_KEY = 'indeed';
 
 async function scrapeJobs(jobTitle) {
   const url = getPageUrl({ title: jobTitle, remoteOnly: false });
@@ -52,7 +51,6 @@ async function scrapeJobsRecursively(url, results = [], page = 1) {
       postedOn: formatPostedOn(postedOn),
       salary: salary || null,
       url: `${BASE_URL}${urlRelative}`,
-      source: SOURCE_KEY,
     };
   }).get();
 

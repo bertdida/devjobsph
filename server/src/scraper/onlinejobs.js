@@ -6,7 +6,6 @@ const config = require('./config');
 const { getJobTagsFromString, formatPostedOn } = require('./utils');
 
 const BASE_URL = 'https://www.onlinejobs.ph';
-const SOURCE_KEY = 'onlinejobs.ph';
 const ONE_DAY = 1 * 24 * 60 * 60 * 1000;
 
 async function scrapeJobs(jobTitle) {
@@ -48,7 +47,6 @@ async function scrapeJobs(jobTitle) {
       salary: salary || null,
       postedOn: formatPostedOn(postedOn),
       url: `${BASE_URL}${urlRelative}`,
-      source: SOURCE_KEY,
     };
   }).get();
 
