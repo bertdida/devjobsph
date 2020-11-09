@@ -1,5 +1,5 @@
+const db = require('./db');
 const scraper = require('./scraper');
-const { saveJobs } = require('./db');
 
 const functions = [
   scraper.indeed.scrapeJobs,
@@ -7,7 +7,7 @@ const functions = [
   scraper.onlinejobs.scrapeJobs,
 ];
 
-async function scrapeJobs() {
+async function scrapeJobs(dbCon) {
   let promises = [];
   scraper.config.searchQueries.forEach((title) => {
     promises = [...promises, ...functions.map((func) => func(title))];
@@ -16,7 +16,13 @@ async function scrapeJobs() {
   const results = await Promise.all(promises);
   const jobs = results.reduce((carry, result) => [...carry, ...result], []);
   const uniqueJobs = removeDuplicates(jobs);
-  saveJobs(uniqueJobs);
+
+  try {
+    await db.client.saveJobs(uniqueJobs, { ordered: false });
+  } finally {
+    await dbCon.close();
+    process.exit();
+  }
 }
 
 function removeDuplicates(jobs) {
@@ -30,4 +36,4 @@ function removeDuplicates(jobs) {
   });
 }
 
-scrapeJobs();
+db.connect(scrapeJobs);

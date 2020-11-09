@@ -8,11 +8,10 @@ const yup = require('yup');
 const dotenv = require('dotenv');
 const compression = require('compression');
 
-const { getJobs } = require('./db');
+const db = require('./db');
 
 dotenv.config();
 
-const port = process.env.PORT || 5000;
 const clientPath = path.join(__dirname, '../../client/build');
 const clientIndex = path.join(clientPath, 'index.html');
 
@@ -30,20 +29,15 @@ app.get('/', (req, res) => {
 
 app.get('/api/jobs', async (req, res, next) => {
   const schema = yup.object().shape({
-    startAfter: yup.string().nullable().default(null),
+    page: yup.number().positive().required().default(1),
     perPage: yup.number().oneOf([10, 15, 20]).default(10),
     tag: yup.string().nullable().default(null),
   });
 
   try {
     const params = await schema.validate(req.query);
-    const { perPage } = params;
-
-    // we are requesting `perPage` + 1 to let our
-    // client know whether the next page is accessible
-
-    const jobs = await getJobs({ ...params, perPage: perPage + 1 });
-    res.json({ data: jobs.slice(0, perPage), hasNext: jobs.length > perPage });
+    const results = await db.client.getJobs(params);
+    res.json(results);
   } catch (error) {
     next(error);
   }
@@ -53,6 +47,18 @@ app.get('*', (req, res) => {
   res.sendFile(clientIndex);
 });
 
-app.listen(port, () => {
-  console.log(`🌍 Serving app on port ${port}...`);
+// eslint-disable-next-line no-unused-vars
+app.use((error, req, res, next) => {
+  res.status(error.status ? error.status : 500);
+  res.json({
+    message: error.message,
+    ...(process.env.NODE_ENV !== 'production' && ({ stack: error.stack })),
+  });
+});
+
+db.connect(() => {
+  const port = process.env.PORT || 5000;
+  app.listen(port, () => {
+    console.log(`✅ Serving app on port ${port}...`);
+  });
 });
