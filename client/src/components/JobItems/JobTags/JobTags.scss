@@ -40,6 +40,10 @@
     background-color: var(--my-background-color, rgb(242, 242, 242));
     color: var(--my-color, rgb(101, 101, 101));
 
+    a {
+      color: inherit;
+    }
+
     &--isHidden {
       display: none;
     }

@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import Card from 'react-bootstrap/Card';
 
-import { JobTags } from './JobTags';
+import { JobTags } from '../JobTags';
 import './JobItem.scss';
 
 export function JobItem({ job }) {

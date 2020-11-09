@@ -1,45 +1,44 @@
 import { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import axios from 'axios';
+import { useHistory } from 'react-router-dom';
+import queryString from 'query-string';
 
+import api from 'common/api';
 import { Loader } from 'components/Loader';
-import { JobItem } from 'components/JobItem';
-import './Home.scss';
+import { JobItems } from 'components/JobItems';
 
 export function Home() {
+  const history = useHistory();
+
   const [jobs, setJobs] = useState([]);
+  const [pagination, setPagination] = useState({});
+  const [query, setQuery] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    const currQuery = queryString.parse(history.location.search);
+    const { page = 1, ...rest } = currQuery;
+    setQuery({ page, ...rest });
+  }, [history.location.search]);
+
+  useEffect(() => {
+    if (query.page === undefined) {
+      return;
+    }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
     (async () => {
-      const response = await axios.get('/api/jobs');
-      setJobs(response.data.data);
+      const response = await api.fetchJobs(query);
+      const { data, ...rest } = response.data;
+      setJobs(data);
+      setPagination(rest);
       setIsLoading(false);
     })();
-  }, []);
+  }, [query]);
 
-  return (
-    <Main isLoading={isLoading} jobs={jobs} />
-  );
-}
-
-function Main({ isLoading, jobs }) {
   if (isLoading) {
     return <Loader message="Loading jobs..." />;
   }
 
-  return (
-    <ul className="jobList">
-      {jobs.map((job) => (
-        <li className="mb-3" key={job._id}>
-          <JobItem job={job} />
-        </li>
-      ))}
-    </ul>
-  );
+  return <JobItems jobs={jobs} pagination={pagination} />;
 }
-
-Main.propTypes = {
-  isLoading: PropTypes.bool.isRequired,
-  jobs: PropTypes.array.isRequired,
-};

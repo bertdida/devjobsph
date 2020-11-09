@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import './JobTags.scss';
 
@@ -15,12 +16,12 @@ export function JobTags({ tags: tagsProp }) {
   const hiddenTags = tags.filter(({ isHidden }) => isHidden);
   const totalHidden = hiddenTags.length;
 
-  function onClick() {
-    setShowHidden(true);
-  }
-
   function onBlur() {
     setShowHidden(false);
+  }
+
+  function onClick() {
+    setShowHidden(true);
   }
 
   function onKeyPress(event) {
@@ -84,7 +85,7 @@ function ListItem({ tag }) {
       }`}
       data-value={name}
     >
-      <span>{name}</span>
+      <Link to={`/?tag=${name.toLowerCase()}`}>{name}</Link>
     </li>
   );
 }
