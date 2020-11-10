@@ -1,11 +1,13 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
+import { useOnClickOutside } from './useOnClickOutside';
 import './JobTags.scss';
 
 export function JobTags({ tags: tagsProp }) {
   const root = useRef();
+  const history = useHistory();
   const [showHidden, setShowHidden] = useState(false);
 
   const tags = tagsProp.map((tag, index) => ({
@@ -16,11 +18,17 @@ export function JobTags({ tags: tagsProp }) {
   const hiddenTags = tags.filter(({ isHidden }) => isHidden);
   const totalHidden = hiddenTags.length;
 
-  function onBlur() {
+  useOnClickOutside(root, showLessTags);
+
+  useEffect(() => {
+    showLessTags();
+  }, [history.location.search]);
+
+  function showLessTags() {
     setShowHidden(false);
   }
 
-  function onClick() {
+  function showAllTags() {
     setShowHidden(true);
   }
 
@@ -30,7 +38,7 @@ export function JobTags({ tags: tagsProp }) {
 
     if (enterOrSpace) {
       event.preventDefault();
-      onClick(event);
+      showAllTags(event);
     }
   }
 
@@ -45,8 +53,7 @@ export function JobTags({ tags: tagsProp }) {
         <span
           role="button"
           tabIndex={0}
-          onBlur={onBlur}
-          onClick={onClick}
+          onClick={showAllTags}
           onKeyPress={onKeyPress}
           className="jobTags__showMore"
         >
