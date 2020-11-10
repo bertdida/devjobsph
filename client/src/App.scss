@@ -31,3 +31,7 @@ body {
   margin-top: var(--vertical-margin);
   margin-bottom: var(--vertical-margin);
 }
+
+:focus {
+  outline: 1px dotted !important;
+}
