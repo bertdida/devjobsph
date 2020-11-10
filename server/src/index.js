@@ -27,6 +27,12 @@ app.get('/', (req, res) => {
   res.sendFile(clientIndex);
 });
 
+function sleep(ms) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
+
 app.get('/api/jobs', async (req, res, next) => {
   const schema = yup.object().shape({
     page: yup.number().positive().required().default(1),
@@ -37,6 +43,8 @@ app.get('/api/jobs', async (req, res, next) => {
   try {
     const params = await schema.validate(req.query);
     const results = await db.client.getJobs(params);
+    await sleep(3000);
+
     res.json(results);
   } catch (error) {
     next(error);

@@ -5,6 +5,7 @@ import queryString from 'query-string';
 import api from 'common/api';
 import { Loader } from 'components/Loader';
 import { JobItems } from 'components/JobItems';
+import './Home.scss';
 
 export function Home() {
   const history = useHistory();
@@ -25,6 +26,7 @@ export function Home() {
       return;
     }
 
+    setIsLoading(true);
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
     (async () => {
@@ -36,9 +38,20 @@ export function Home() {
     })();
   }, [query]);
 
-  if (isLoading) {
-    return <Loader message="Loading jobs..." />;
-  }
+  return (
+    <div className="wrapper">
+      {isLoading && <JobsLoader />}
+      <JobItems jobs={jobs} pagination={pagination} />
+    </div>
+  );
+}
 
-  return <JobItems jobs={jobs} pagination={pagination} />;
+function JobsLoader() {
+  return (
+    <div className="jobsLoader">
+      <div className="jobsLoader__inner">
+        <Loader message="Loading jobs..." />
+      </div>
+    </div>
+  );
 }
