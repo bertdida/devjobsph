@@ -1,3 +1,7 @@
+:focus {
+  outline: 1px dotted !important;
+}
+
 body {
   --max-width: 700px;
   --header-height: 65px;
@@ -29,10 +33,8 @@ body {
 
 .main {
   --vertical-margin: 30px;
+
   margin-top: var(--vertical-margin);
   margin-bottom: var(--vertical-margin);
-}
-
-:focus {
-  outline: 1px dotted !important;
+  min-height: 770px; // height when 5 JobSkeleton's are showing
 }

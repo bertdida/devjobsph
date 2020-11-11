@@ -5,6 +5,7 @@ import queryString from 'query-string';
 import api from 'common/api';
 import { Loader } from 'components/Loader';
 import { JobItems } from 'components/JobItems';
+import { JobSkeleton } from 'components/JobSkeleton';
 import './Home.scss';
 
 export function Home() {
@@ -38,6 +39,10 @@ export function Home() {
     })();
   }, [query]);
 
+  if (isLoading && jobs.length === 0) {
+    return <JobSkeletons />;
+  }
+
   return (
     <div className="wrapper">
       {isLoading && <JobsLoader />}
@@ -54,4 +59,9 @@ function JobsLoader() {
       </div>
     </div>
   );
+}
+
+function JobSkeletons({ total = 5 }) {
+  // eslint-disable-next-line react/no-array-index-key
+  return [...Array(total)].map((_, index) => <JobSkeleton key={index} />);
 }
