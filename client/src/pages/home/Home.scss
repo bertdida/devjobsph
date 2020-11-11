@@ -9,6 +9,7 @@
   display: flex;
   justify-content: center;
   z-index: 1;
+  cursor: not-allowed;
 
   &__inner {
     position: absolute;
@@ -22,5 +23,6 @@
     border-radius: 40px;
     background-color: var(--foreground-color);
     color: var(--background-color);
+    cursor: initial;
   }
 }
