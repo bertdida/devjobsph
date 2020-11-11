@@ -1,6 +1,7 @@
 import Container from 'react-bootstrap/Container';
 
 import { GitHubIcon } from 'common/icons';
+import { Title } from 'components/Title';
 import './Footer.scss';
 
 export function Footer() {
@@ -16,7 +17,7 @@ export function Footer() {
           <GitHubIcon />
         </a>
 
-        <span className="footer__title">DevJobsPh</span>
+        <Title />
       </Container>
     </Container>
   );
