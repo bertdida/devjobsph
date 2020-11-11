@@ -5,6 +5,7 @@
   "main": "./server/src/index.js",
   "scripts": {
     "start": "cd ./server && npm run start",
+    "start:client": "cd ./client && npm run start",
     "build": "cd ./client && npm run build",
     "dev": "cd ./server && npm run dev",
     "scrape": "cd ./server && npm run scrape",
