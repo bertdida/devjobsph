@@ -1,0 +1,54 @@
+.jobSkeleton {
+  background-color: var(--card-background-color);
+  border: 0;
+
+  &__title,
+  &__postedBy,
+  &__tag {
+    background-color: var(--background-color);
+  }
+
+  &__title {
+    --height: 24px;
+
+    width: 90%;
+    max-width: 400px;
+    height: var(--height);
+    border-radius: var(--height);
+    margin-bottom: 12px;
+  }
+
+  &__postedBy {
+    --height: 19px;
+
+    width: 20%;
+    height: var(--height);
+    border-radius: var(--height);
+  }
+
+  &__tag {
+    --height: 18px;
+    --width: 50px;
+
+    width: var(--width);
+    height: var(--height);
+    border-radius: var(--height);
+    display: inline-block;
+    margin-right: 5px;
+
+    &:nth-child(2) {
+      --width: 75px;
+    }
+
+    &:nth-child(3) {
+      --width: 45px;
+    }
+  }
+
+  &__footer {
+    border-top: 0;
+    padding-top: 5px;
+    padding-bottom: 1.4rem;
+    background-color: transparent;
+  }
+}
