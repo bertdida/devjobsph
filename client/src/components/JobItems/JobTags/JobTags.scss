@@ -1,10 +1,6 @@
 .jobTags {
   --font-size: 13px;
 
-  display: flex;
-  align-items: center;
-  width: fit-content;
-
   &--showHidden {
     .jobTags__listItem {
       display: inline-block;
@@ -16,15 +12,17 @@
   }
 
   &__showMore {
-    cursor: pointer;
     font-size: var(--font-size);
+    display: inline-block;
     margin-left: 5px;
+    cursor: pointer;
   }
 
   &__list {
     padding: 0;
     margin: 0;
     list-style-type: none;
+    display: inline-block;
   }
 
   &__listItem {
