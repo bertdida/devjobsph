@@ -1,11 +1,14 @@
 import { lazy } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import {
+  Switch, Route, Redirect, withRouter,
+} from 'react-router-dom';
 
 import { NotFound } from './pages/NotFound';
+import { withTracker } from './common/withTracker';
 
 const Home = lazy(() => import('./pages/home'));
 
-export function Routes() {
+function WrappedRoutes() {
   return (
     <Switch>
       <Route exact path="/" component={Home} />
@@ -14,3 +17,5 @@ export function Routes() {
     </Switch>
   );
 }
+
+export const Routes = withRouter(withTracker(WrappedRoutes));
