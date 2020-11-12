@@ -18,10 +18,14 @@ const clientIndex = path.join(clientPath, 'index.html');
 const app = express();
 app.use(express.json());
 app.use(cors());
-app.use(helmet());
 app.use(morgan('common'));
 app.use(compression());
 app.use(express.static(clientPath));
+
+// https:// stackoverflow.com/q/63401777/8062659
+app.use(helmet({
+  contentSecurityPolicy: false,
+}));
 
 app.get('/', (req, res) => {
   res.sendFile(clientIndex);
