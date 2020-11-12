@@ -21,7 +21,7 @@ export function JobItem({ job }) {
               {title}
             </a>
           </Card.Title>
-          <small>{postedOnStr}</small>
+          <small className="jobItem__postedOn">{postedOnStr}</small>
         </div>
 
         <Card.Subtitle className="jobItem__postedBy">{postedBy}</Card.Subtitle>
