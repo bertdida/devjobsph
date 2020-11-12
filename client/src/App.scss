@@ -14,10 +14,10 @@ body {
   --svg-color: #333;
 
   &[data-theme="dark"] {
-    --background-color: #222323;
+    --background-color: #121212;
     --foreground-color: rgba(255, 255, 255, 0.87);
     --border-color: rgba(255, 255, 255, 0.06);
-    --card-background-color: #302f2f;
+    --card-background-color: #1e1e1e;
     --card-foreground-secondary-color: rgba(255, 255, 255, 0.6);
     --svg-color: #fff;
   }
