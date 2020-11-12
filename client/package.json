@@ -22,7 +22,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "heroku-postbuild": "set NPM_CONFIG_PRODUCTION=false && npm run build",
+    "heroku-postbuild": "set NPM_CONFIG_PRODUCTION=false INLINE_RUNTIME_CHUNK=false && npm run build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint src/"
