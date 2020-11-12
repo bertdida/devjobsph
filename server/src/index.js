@@ -22,7 +22,7 @@ app.use(morgan('common'));
 app.use(compression());
 app.use(express.static(clientPath));
 
-// https:// stackoverflow.com/q/63401777/8062659
+// https://stackoverflow.com/q/63401777/8062659
 app.use(helmet({
   contentSecurityPolicy: false,
 }));
