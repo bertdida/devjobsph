@@ -7,7 +7,6 @@
     "start": "npm start --prefix server",
     "build": "npm run build --prefix client",
     "postinstall": "cd ./server && npm install && cd ../client && npm install ",
-    "heroku-postbuild": "npm run heroku-postbuild --prefix client",
     "scrape": "npm run scrape --prefix server",
     "dev": "concurrently --kill-others \"npm run dev --prefix server\" \"npm run start --prefix client\"",
     "lint": "concurrently \"npm run lint --prefix server\" \"npm run lint --prefix client\""
