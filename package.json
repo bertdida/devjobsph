@@ -4,15 +4,13 @@
   "description": "",
   "main": "./server/src/index.js",
   "scripts": {
-    "start": "cd ./server && npm run start",
-    "start:client": "cd ./client && npm run start",
-    "build": "cd ./client && npm run build",
-    "dev": "cd ./server && npm run dev",
-    "scrape": "cd ./server && npm run scrape",
-    "lint:server": "cd ./server && npm run lint",
-    "lint:client": "cd ./client && npm run lint",
-    "postinstall": "cd ./client && npm install && cd ../server && npm install",
-    "heroku-postbuild": "cd ./client && npm run heroku-postbuild"
+    "start": "npm start --prefix server",
+    "build": "npm run build --prefix client",
+    "postinstall": "cd ./server && npm install && cd ../client && npm install ",
+    "heroku-postbuild": "npm run heroku-postbuild --prefix client",
+    "scrape": "npm run scrape --prefix server",
+    "dev": "concurrently --kill-others \"npm run dev --prefix server\" \"npm run start --prefix client\"",
+    "lint": "concurrently \"npm run lint --prefix server\" \"npm run lint --prefix client\""
   },
   "repository": {
     "type": "git",
