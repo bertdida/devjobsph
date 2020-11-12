@@ -39,6 +39,10 @@ export function Home() {
     })();
   }, [query]);
 
+  if (!isLoading && jobs.length === 0) {
+    return <h3>Nothing to show</h3>;
+  }
+
   if (isLoading && jobs.length === 0) {
     return <JobSkeletons />;
   }
