@@ -3,7 +3,7 @@ const cheerio = require('cheerio');
 const puppeteer = require('puppeteer');
 
 const config = require('./config');
-const { getJobTagsFromString, formatPostedOn } = require('./utils');
+const { getJobTagsFromString, formatPostedAt } = require('./utils');
 
 const BASE_URL = 'https://www.glassdoor.com';
 
@@ -49,13 +49,13 @@ async function scrapeJobsRecursively(url, results = [], page = 1) {
   const currResults = targets.map((_, element) => {
     const title = $(element).find('.jobTitle').text().trim();
     const postedBy = $(element).find('.jobHeader').text().trim();
-    const postedOn = $(element).find('[data-test=job-age]').text().trim();
+    const postedAt = $(element).find('[data-test=job-age]').text().trim();
     const urlRelative = $(element).find('.jobHeader a').attr('href');
 
     return {
       title,
       postedBy,
-      postedOn: formatPostedOn(postedOn),
+      postedAt: formatPostedAt(postedAt),
       salary: null,
       url: `${BASE_URL}${urlRelative}`,
     };

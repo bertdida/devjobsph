@@ -7,10 +7,10 @@ import './JobItem.scss';
 
 export function JobItem({ job }) {
   const {
-    title, postedBy, salary, tags, postedOn, url,
+    title, postedBy, salary, tags, postedAt, url,
   } = job;
 
-  const postedOnStr = moment(postedOn).fromNow();
+  const postedAtStr = moment(postedAt).fromNow();
 
   return (
     <Card className="jobItem">
@@ -21,7 +21,7 @@ export function JobItem({ job }) {
               {title}
             </a>
           </Card.Title>
-          <small className="jobItem__postedOn">{postedOnStr}</small>
+          <small className="jobItem__postedAt">{postedAtStr}</small>
         </div>
 
         <Card.Subtitle className="jobItem__postedBy">{postedBy}</Card.Subtitle>

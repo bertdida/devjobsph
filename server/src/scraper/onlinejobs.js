@@ -3,7 +3,7 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 
 const config = require('./config');
-const { getJobTagsFromString, formatPostedOn } = require('./utils');
+const { getJobTagsFromString, formatPostedAt } = require('./utils');
 
 const BASE_URL = 'https://www.onlinejobs.ph';
 const ONE_DAY = 1 * 24 * 60 * 60 * 1000;
@@ -33,24 +33,24 @@ async function scrapeJobs(jobTitle) {
   const results = targets.map((_, element) => {
     const title = $(element).find('h4').contents().get(0).nodeValue.trim();
 
-    const $postedOn = $(element).find('p:contains("Posted on")');
-    const postInfo = $postedOn.text().trim();
+    const $postedAt = $(element).find('p:contains("Posted on")');
+    const postInfo = $postedAt.text().trim();
     const postedBy = postInfo.split(' • ')[0];
-    const postedOn = $(element).find('p[data-temp]').data('temp');
+    const postedAt = $(element).find('p[data-temp]').data('temp');
 
-    const salary = $postedOn.next().text().trim();
+    const salary = $postedAt.next().text().trim();
     const urlRelative = $(element).find('> a').attr('href');
 
     return {
       title,
       postedBy,
       salary: salary || null,
-      postedOn: formatPostedOn(postedOn),
+      postedAt: formatPostedAt(postedAt),
       url: `${BASE_URL}${urlRelative}`,
     };
   }).get();
 
-  const jobs = results.filter((result) => isWithin24Hours(result.postedOn));
+  const jobs = results.filter((result) => isWithin24Hours(result.postedAt));
 
   if (!config.scrapeTags) {
     return jobs;
@@ -60,8 +60,8 @@ async function scrapeJobs(jobTitle) {
   return Promise.all(promises);
 }
 
-function isWithin24Hours(postedOn) {
-  return new Date(postedOn) > (Date.now() - ONE_DAY);
+function isWithin24Hours(postedAt) {
+  return new Date(postedAt) > (Date.now() - ONE_DAY);
 }
 
 async function scrapeJobTags({ url: jobUrl }) {

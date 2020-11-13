@@ -16,7 +16,7 @@ const jobSchema = new Schema({
     type: String,
     trim: true,
   },
-  postedOn: {
+  postedAt: {
     type: Date,
     required: true,
   },
