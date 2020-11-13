@@ -26,7 +26,7 @@ module.exports = {
   'Vue.js': /\bvue(?:.?js)?\b/ig,
   'ASP.NET': /\basp.net\b/ig,
 
-  HTML: /\bhtml\b/ig,
+  HTML: /\bhtml(?:5)?\b/ig,
   CSS: /\bcss(?:3)?\b/ig,
   jQuery: /\bjquery\b/ig,
   Bootstrap: /\bbootstrap\b/ig,
