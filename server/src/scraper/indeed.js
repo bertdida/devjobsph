@@ -2,7 +2,7 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 
 const config = require('./config');
-const { getJobTagsFromString, formatPostedAt } = require('./utils');
+const { getJobTagsFromString } = require('./utils');
 
 const BASE_URL = 'https://ph.indeed.com';
 
@@ -40,7 +40,6 @@ async function scrapeJobsRecursively(url, results = [], page = 1) {
     const _jk = $(element).data('jk');
     const title = $(element).find('.title a').attr('title').trim();
     const postedBy = $(element).find('.company').text().trim();
-    const postedAt = $(element).find('.date').text().trim();
     const salary = $(element).find('.salaryText').text().trim();
     const urlRelative = $(element).find('.title a').attr('href');
 
@@ -48,7 +47,6 @@ async function scrapeJobsRecursively(url, results = [], page = 1) {
       _jk,
       title,
       postedBy,
-      postedAt: formatPostedAt(postedAt),
       salary: salary || null,
       url: `${BASE_URL}${urlRelative}`,
     };

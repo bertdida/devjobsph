@@ -3,7 +3,7 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 
 const config = require('./config');
-const { getJobTagsFromString, formatPostedAt } = require('./utils');
+const { getJobTagsFromString } = require('./utils');
 
 const BASE_URL = 'https://www.onlinejobs.ph';
 const ONE_DAY = 1 * 24 * 60 * 60 * 1000;
@@ -33,19 +33,16 @@ async function scrapeJobs(jobTitle) {
   const results = targets.map((_, element) => {
     const title = $(element).find('h4').contents().get(0).nodeValue.trim();
 
-    const $postedAt = $(element).find('p:contains("Posted on")');
-    const postInfo = $postedAt.text().trim();
-    const postedBy = postInfo.split(' • ')[0];
-    const postedAt = $(element).find('p[data-temp]').data('temp');
+    const $postedOn = $(element).find('p:contains("Posted on")');
+    const [postedBy] = $postedOn.text().trim().split(' • ');
 
-    const salary = $postedAt.next().text().trim();
+    const salary = $postedOn.next().text().trim();
     const urlRelative = $(element).find('> a').attr('href');
 
     return {
       title,
       postedBy,
       salary: salary || null,
-      postedAt: formatPostedAt(postedAt),
       url: `${BASE_URL}${urlRelative}`,
     };
   }).get();

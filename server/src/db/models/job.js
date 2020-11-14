@@ -16,10 +16,6 @@ const jobSchema = new Schema({
     type: String,
     trim: true,
   },
-  postedAt: {
-    type: Date,
-    required: true,
-  },
   url: {
     type: String,
     required: true,
