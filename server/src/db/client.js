@@ -26,7 +26,7 @@ async function getJobs({ page, perPage, tag }) {
     .find(conditions)
     .skip((page - 1) * perPage)
     .limit(perPage)
-    .sort({ postedAt: 'desc', createdAt: 'desc' })
+    .sort({ createdAt: 'desc' })
     .select('-__v')
     .exec();
 
