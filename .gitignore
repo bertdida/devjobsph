@@ -2,6 +2,7 @@
 **/.vscode
 
 /client/build
+/client/logo
 
 devjobsph.code-workspace
 .env
