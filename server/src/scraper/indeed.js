@@ -72,7 +72,12 @@ async function scrapeJobTags({ _jk }) {
     return [];
   }
 
-  const $ = cheerio.load(response.data[_jk]);
+  const descriptionHtml = response.data[_jk];
+  if (!descriptionHtml) {
+    return [];
+  }
+
+  const $ = cheerio.load(descriptionHtml);
   const description = $.text();
   return getJobTagsFromString(description);
 }
