@@ -92,7 +92,7 @@ function ListItem({ tag }) {
       }`}
       data-value={name}
     >
-      <Link to={`/?tag=${name.toLowerCase()}`}>{name}</Link>
+      <Link to={`/?tag=${name.toLowerCase()}`}>{`#${name}`}</Link>
     </li>
   );
 }
