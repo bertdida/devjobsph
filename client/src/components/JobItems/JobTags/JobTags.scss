@@ -152,5 +152,10 @@
       --my-background-color: #2171b2;
       --my-color: #fff;
     }
+
+    &[data-value="django" i] {
+      --my-background-color: #0f3e2e;
+      --my-color: #fff;
+    }
   }
 }
