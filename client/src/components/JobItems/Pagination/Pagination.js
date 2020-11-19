@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { Link, useLocation } from 'react-router-dom';
+import queryString from 'query-string';
 
 import './Pagination.scss';
 
@@ -22,12 +23,17 @@ Pagination.propTypes = {
 };
 
 function PaginationLink({ page, children }) {
-  const { pathname } = useLocation();
-  const url = page === 1 ? pathname : `${pathname}?page=${page}`;
+  const { pathname, search } = useLocation();
 
   if (page === null) {
     return null;
   }
+
+  const currQuery = queryString.parse(search);
+  const nextQuery = { ...currQuery, page: page === 1 ? null : page };
+
+  const params = queryString.stringify(nextQuery, { skipNull: true });
+  const url = `${pathname}?${params}`;
 
   return <Link className="pagination__nav" to={url}>{children}</Link>;
 }
