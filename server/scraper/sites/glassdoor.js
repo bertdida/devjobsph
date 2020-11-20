@@ -2,8 +2,8 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const puppeteer = require('puppeteer');
 
-const config = require('./config');
-const { getJobTagsFromString } = require('./utils');
+const config = require('../config');
+const { getJobTagsFromString } = require('../utils');
 
 const BASE_URL = 'https://www.glassdoor.com';
 

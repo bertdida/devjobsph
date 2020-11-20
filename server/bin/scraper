@@ -1,15 +1,17 @@
-const db = require('./db');
-const scraper = require('./scraper');
+#!/usr/bin/env node
+
+const db = require('../db');
+const { sites, config } = require('../scraper');
 
 const functions = [
-  scraper.indeed.scrapeJobs,
-  scraper.glassdoor.scrapeJobs,
-  scraper.onlinejobs.scrapeJobs,
+  sites.indeed.scrapeJobs,
+  sites.glassdoor.scrapeJobs,
+  sites.onlinejobs.scrapeJobs,
 ];
 
 async function scrapeJobs(dbCon) {
   let promises = [];
-  scraper.config.searchQueries.forEach((title) => {
+  config.searchQueries.forEach((title) => {
     promises = [...promises, ...functions.map((func) => func(title))];
   });
 
