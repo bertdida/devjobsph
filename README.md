@@ -1,6 +1,8 @@
 # DevJobsPh
 
-DevJobsPh is a job aggregator made especially for Filipino Software Developers. At this moment, only [ph.indeed.com](https://ph.indeed.com/), [glassdoor.com](https://www.glassdoor.com/), and [onlinejobs.ph](https://www.onlinejobs.ph/) job sites are maintained.
+DevJobsPh is a job aggregator made especially for Filipino Software Developers.
+
+It simply works by scheduling a [script](https://github.com/bertdida/DevJobsPh/blob/main/server/bin/scraper) to run every midnight, GMT+8 timezone, that will scrape for predefined job titles then save the results to the database. At this moment, only [ph.indeed.com](https://ph.indeed.com/), [glassdoor.com](https://www.glassdoor.com/), and [onlinejobs.ph](https://www.onlinejobs.ph/) job sites are maintained.
 
 Check the live site on [devjobsph.herokuapp.com](https://devjobsph.herokuapp.com/).
 
