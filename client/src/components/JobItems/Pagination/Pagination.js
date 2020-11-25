@@ -35,7 +35,11 @@ function PaginationLink({ page, children }) {
   const params = queryString.stringify(nextQuery, { skipNull: true });
   const url = `${pathname}?${params}`;
 
-  return <Link className="pagination__nav" to={url}>{children}</Link>;
+  return (
+    <Link className="btn pagination__nav" to={url}>
+      {children}
+    </Link>
+  );
 }
 
 PaginationLink.propTypes = {
