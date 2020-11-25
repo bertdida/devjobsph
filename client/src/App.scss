@@ -25,6 +25,16 @@ body {
   background-color: var(--background-color);
   color: var(--foreground-color);
   font-family: Poppins, sans-serif;
+
+  min-height: 100vh;
+  display: flex;
+  margin: 0;
+
+  #root {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    width: 100%;
+  }
 }
 
 .app {
