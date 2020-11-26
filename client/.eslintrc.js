@@ -24,7 +24,7 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'react/forbid-prop-types': 'off',
     'no-use-before-define': ['error', { functions: false }],
-    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
+    'react/jsx-filename-extension': ['warn', { extensions: ['.js', '.jsx'] }],
     'no-underscore-dangle': ['error', { allow: ['_id'] }],
     camelcase: 'off',
     'react/jsx-props-no-spreading': 'off',
