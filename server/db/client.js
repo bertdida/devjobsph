@@ -40,7 +40,7 @@ async function getJobs({
     .find(conditions)
     .skip((page - 1) * perPage)
     .limit(perPage)
-    .sort({ createdAt: 'desc' })
+    .sort({ _id: 'desc' })
     .select('-__v')
     .exec();
 
