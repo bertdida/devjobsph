@@ -26,6 +26,8 @@ app.use(helmet({
   contentSecurityPolicy: false,
 }));
 
+app.use('/api/jobs', jobsRoute);
+
 // eslint-disable-next-line no-unused-vars
 app.use((error, req, res, next) => {
   res.status(error.status ? error.status : 500);
@@ -34,8 +36,6 @@ app.use((error, req, res, next) => {
     ...(process.env.NODE_ENV !== 'production' && ({ stack: error.stack })),
   });
 });
-
-app.use('/api/jobs', jobsRoute);
 
 app.get('*', (req, res) => {
   res.sendFile(clientIndex);
