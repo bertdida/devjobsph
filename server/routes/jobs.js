@@ -17,6 +17,10 @@ router.get('/', async (req, res, next) => {
     const results = await db.client.getJobs(params);
     res.json(results);
   } catch (error) {
+    if (error.name === 'ValidationError') {
+      error.status = 422;
+    }
+
     next(error);
   }
 });
