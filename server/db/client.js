@@ -4,14 +4,28 @@ async function saveJobs(jobs, options = {}) {
   return Job.insertMany(jobs, options);
 }
 
-async function getJobs({ page, perPage, tag }) {
+async function getJobs({
+  page, perPage, tag, ...rest
+}) {
   let conditions = {};
+
   if (tag) {
     conditions = {
       tags: {
-        $in: [
-          RegExp(`^${tag}$`, 'i'),
-        ],
+        $in: (
+          tag
+            .split(',')
+            .map((value) => RegExp(`^${value}$`, 'i'))
+        ),
+      },
+    };
+  }
+
+  if (!tag && rest.hasTag !== null) {
+    conditions = {
+      ...conditions,
+      tags: {
+        [rest.hasTag ? '$ne' : '$eq']: [],
       },
     };
   }
