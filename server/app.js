@@ -7,7 +7,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const compression = require('compression');
 
-const { jobsRoute } = require('./routes');
+const { jobsRoute, tagsRoute } = require('./routes');
 
 const app = express();
 const clientPath = path.join(__dirname, '../client/build');
@@ -27,6 +27,7 @@ app.use(helmet({
 }));
 
 app.use('/api/jobs', jobsRoute);
+app.use('/api/tags', tagsRoute);
 
 // eslint-disable-next-line no-unused-vars
 app.use((error, req, res, next) => {
