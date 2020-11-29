@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types';
 import { Link, useLocation } from 'react-router-dom';
+import { GrLinkNext, GrLinkPrevious } from 'react-icons/gr';
 import queryString from 'query-string';
 
+import { Button } from 'components/Button';
 import './Pagination.scss';
 
 export function Pagination({ pagination }) {
@@ -9,10 +11,16 @@ export function Pagination({ pagination }) {
 
   return (
     <div className="pagination">
-      <PaginationLink page={prev_page}>Previous</PaginationLink>
+      <PaginationLink page={prev_page}>
+        <GrLinkPrevious />
+        <span className="ml-1">Previous</span>
+      </PaginationLink>
 
       <div className="ml-auto">
-        <PaginationLink page={next_page}>Next</PaginationLink>
+        <PaginationLink page={next_page}>
+          <span className="mr-1">Next</span>
+          <GrLinkNext />
+        </PaginationLink>
       </div>
     </div>
   );
@@ -36,9 +44,9 @@ function PaginationLink({ page, children }) {
   const url = `${pathname}?${params}`;
 
   return (
-    <Link className="btn pagination__nav" to={url}>
+    <Button variant={null} as={Link} to={url}>
       {children}
-    </Link>
+    </Button>
   );
 }
 

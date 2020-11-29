@@ -1,10 +1,12 @@
 import { useContext } from 'react';
 import Container from 'react-bootstrap/Container';
+import { BsMoon } from 'react-icons/bs';
+import { FaSun } from 'react-icons/fa';
 
 import { ThemeContext } from 'common/Theme';
-import { SunIcon, MoonIcon } from 'common/icons';
 import { FilterNav } from 'components/FilterNav';
 import { Title } from 'components/Title';
+import { Button } from 'components/Button';
 import './Header.scss';
 
 export function Header() {
@@ -17,9 +19,9 @@ export function Header() {
 
         <div>
           <FilterNav />
-          <button type="button" className="header__toggleBtn" onClick={toggle}>
-            {isDarkMode ? <SunIcon /> : <MoonIcon />}
-          </button>
+          <Button variant={null} onClick={toggle}>
+            {isDarkMode ? <FaSun /> : <BsMoon />}
+          </Button>
         </div>
       </Container>
     </Container>

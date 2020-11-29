@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import queryString from 'query-string';
 import { useHistory } from 'react-router-dom';
 
 import api from 'common/api';
+import { Button } from 'components/Button';
 import { Loader } from 'components/Loader';
 import { FormPills } from './FormPills';
 
@@ -75,7 +75,7 @@ export function FilterNav() {
 
   return (
     <>
-      <Button variant="link" className="btn--link" onClick={toggleNav}>
+      <Button size="sm mr-1" onClick={toggleNav}>
         All Filters
       </Button>
 
@@ -103,12 +103,12 @@ export function FilterNav() {
 
               <div className="filterNav__footer">
                 <div className="filterNav__buttonGroup">
-                  <Button variant="link" className="btn--link" onClick={resetForm} disabled={!hasSelected}>
+                  <Button variant={null} onClick={resetForm} disabled={!hasSelected}>
                     Reset
                   </Button>
                 </div>
 
-                <Button variant="link" className="btn--link mr-1" onClick={closeNav}>
+                <Button variant={null} className="mr-1" onClick={closeNav}>
                   Cancel
                 </Button>
                 <Button disabled={!hasSelected} onClick={onFormSubmit}>
