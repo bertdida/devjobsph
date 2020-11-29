@@ -17,13 +17,28 @@ export function FilterNav() {
   const [form, setForm] = useState({ tags: [] });
 
   const { location } = history;
-  const { pathname } = location;
-
-  const selectedTags = form.tags.filter(({ isSelected }) => isSelected);
-  const hasSelected = selectedTags.length > 0;
+  const { search, pathname } = location;
 
   useEffect(() => {
-    if (!isShown || form.tags.length) {
+    if (isLoading) {
+      return;
+    }
+
+    parseQueryParams(search);
+  }, [isLoading, search]);
+
+  useEffect(() => {
+    const unListen = history.listen((currLocation) => {
+      parseQueryParams(currLocation.search);
+    });
+
+    return function cleanUp() {
+      unListen();
+    };
+  }, [isLoading, history]);
+
+  useEffect(() => {
+    if (form.tags.length) {
       return;
     }
 
@@ -35,6 +50,23 @@ export function FilterNav() {
       setIsLoading(false);
     })();
   }, [form, isShown]);
+
+  function parseQueryParams(query) {
+    const currQuery = queryString.parse(query);
+    const { tag: tagQuery = '' } = currQuery;
+
+    const tagsQuery = Array.isArray(tagQuery) ? tagQuery : [tagQuery];
+    const tagsQueryLower = tagsQuery.map((tag) => tag.toLowerCase());
+
+    setForm((prev) => {
+      // eslint-disable-next-line arrow-body-style
+      const tags = prev.tags.map((tag) => {
+        return { ...tag, isSelected: tagsQueryLower.includes(tag.text.toLowerCase()) };
+      });
+
+      return { ...prev, tags };
+    });
+  }
 
   function toggleNav() {
     setIsShown((prev) => !prev);
@@ -55,6 +87,7 @@ export function FilterNav() {
 
   function onFormSubmit(event) {
     event.preventDefault();
+    const selectedTags = form.tags.filter(({ isSelected }) => isSelected);
 
     if (!selectedTags.length) {
       closeNav();
@@ -104,7 +137,7 @@ export function FilterNav() {
 
               <div className="filterNav__footer">
                 <div className="filterNav__buttonGroup">
-                  <Button variant={null} onClick={resetForm} disabled={!hasSelected}>
+                  <Button variant={null} onClick={resetForm}>
                     Reset
                   </Button>
                 </div>
@@ -112,7 +145,7 @@ export function FilterNav() {
                 <Button variant={null} className="mr-1" onClick={closeNav}>
                   Cancel
                 </Button>
-                <Button disabled={!hasSelected} onClick={onFormSubmit}>
+                <Button onClick={onFormSubmit}>
                   Apply
                 </Button>
               </div>
