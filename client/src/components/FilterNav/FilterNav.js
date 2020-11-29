@@ -65,6 +65,7 @@ export function FilterNav() {
     const params = queryString.stringify({ tag: selectedTagsTexts });
 
     history.push({ pathname, search: `?${params}` });
+    closeNav();
   }
 
   function resetForm() {
