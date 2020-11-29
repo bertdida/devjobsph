@@ -13,7 +13,7 @@ import './FilterNav.scss';
 export function FilterNav() {
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(true);
-  const [isShown, setIsShown] = useState(true);
+  const [isShown, setIsShown] = useState(false);
   const [form, setForm] = useState({ tags: [] });
 
   const { location } = history;
