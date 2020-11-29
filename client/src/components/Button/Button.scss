@@ -1,0 +1,19 @@
+body[data-theme="dark"] {
+  .button {
+    color: #fff;
+  }
+}
+
+.button {
+  border-radius: 40px;
+  display: inline-flex;
+  align-items: center;
+
+  path {
+    stroke: inherit;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
