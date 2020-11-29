@@ -3,6 +3,7 @@ import Container from 'react-bootstrap/Container';
 
 import { ThemeContext } from 'common/Theme';
 import { SunIcon, MoonIcon } from 'common/icons';
+import { FilterNav } from 'components/FilterNav';
 import { Title } from 'components/Title';
 import './Header.scss';
 
@@ -14,9 +15,12 @@ export function Header() {
       <Container className="header__inner">
         <Title />
 
-        <button type="button" className="header__toggleBtn" onClick={toggle}>
-          {isDarkMode ? <SunIcon /> : <MoonIcon />}
-        </button>
+        <div>
+          <FilterNav />
+          <button type="button" className="header__toggleBtn" onClick={toggle}>
+            {isDarkMode ? <SunIcon /> : <MoonIcon />}
+          </button>
+        </div>
       </Container>
     </Container>
   );
