@@ -107,6 +107,11 @@ export function FilterNav() {
     setForm({ ...form, tags });
   }
 
+  function onCancel() {
+    parseQueryParams(search);
+    closeNav();
+  }
+
   return (
     <>
       <Button size="sm mr-1" onClick={toggleNav}>
@@ -142,7 +147,7 @@ export function FilterNav() {
                   </Button>
                 </div>
 
-                <Button variant={null} className="mr-1" onClick={closeNav}>
+                <Button variant={null} className="mr-1" onClick={onCancel}>
                   Cancel
                 </Button>
                 <Button onClick={onFormSubmit}>
