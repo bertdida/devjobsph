@@ -35,7 +35,7 @@ export function FilterNav() {
     return function cleanUp() {
       unListen();
     };
-  }, [isLoading, history]);
+  }, [history]);
 
   useEffect(() => {
     if (form.tags.length) {
@@ -49,7 +49,7 @@ export function FilterNav() {
       setForm({ ...form, tags });
       setIsLoading(false);
     })();
-  }, [form, isShown]);
+  }, [form]);
 
   function parseQueryParams(query) {
     const currQuery = queryString.parse(query);
