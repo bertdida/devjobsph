@@ -13,7 +13,10 @@ export function FilterNav() {
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(true);
   const [isShown, setIsShown] = useState(false);
-  const [form, setForm] = useState({ tags: null });
+  const [form, setForm] = useState({
+    tags: null,
+    requireTag: false,
+  });
 
   const { location } = history;
   const { search, pathname } = location;
@@ -84,15 +87,15 @@ export function FilterNav() {
 
   function onFormSubmit(event) {
     event.preventDefault();
-    const selectedTags = form.tags.filter(({ isSelected }) => isSelected);
 
-    if (!selectedTags.length) {
-      closeNav();
-      return;
-    }
+    const { tags, requireTag } = form;
+    const selectedTags = tags.filter(({ isSelected }) => isSelected);
 
     const selectedTagsTexts = selectedTags.map(({ text }) => text.toLowerCase());
-    const params = queryString.stringify({ tag: selectedTagsTexts });
+    const params = queryString.stringify({
+      tag: selectedTagsTexts,
+      ...(requireTag ? { hasTag: true } : null),
+    });
 
     history.push({ pathname, search: `?${params}` });
     closeNav();
@@ -107,6 +110,12 @@ export function FilterNav() {
   function onCancel() {
     parseQueryParams(search);
     closeNav();
+  }
+
+  function onChange(event) {
+    const { target } = event;
+    const { name, checked } = target;
+    setForm({ ...form, [name]: checked });
   }
 
   return (
@@ -132,6 +141,17 @@ export function FilterNav() {
                       tags={form.tags}
                       onToggleTag={onToggleTag}
                       label="Tags"
+                    />
+                  </Form.Group>
+
+                  <Form.Group>
+                    <Form.Check
+                      type="switch"
+                      id="requireTag"
+                      name="requireTag"
+                      label="Hide jobs without tags"
+                      checked={form.requireTag}
+                      onChange={onChange}
                     />
                   </Form.Group>
                 </Form>
