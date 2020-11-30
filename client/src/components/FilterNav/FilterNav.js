@@ -152,7 +152,6 @@ export function FilterNav() {
                   Apply
                 </Button>
               </div>
-
             </>
           )}
       </div>
