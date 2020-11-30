@@ -59,10 +59,9 @@ export function FilterNav() {
     const tagsQueryLower = tagsQuery.map((tag) => tag.toLowerCase());
 
     setForm((prev) => {
-      // eslint-disable-next-line arrow-body-style
-      const tags = prev.tags.map((tag) => {
-        return { ...tag, isSelected: tagsQueryLower.includes(tag.text.toLowerCase()) };
-      });
+      const tags = prev.tags.map((tag) => ({
+        ...tag, isSelected: tagsQueryLower.includes(tag.text.toLowerCase()),
+      }));
 
       return { ...prev, tags };
     });
@@ -77,10 +76,9 @@ export function FilterNav() {
   }
 
   function onToggleTag(tagText) {
-    // eslint-disable-next-line arrow-body-style
-    const tags = form.tags.map(({ isSelected, ...rest }) => {
-      return { ...rest, isSelected: rest.text !== tagText ? isSelected : !isSelected };
-    });
+    const tags = form.tags.map(({ isSelected, ...rest }) => ({
+      ...rest, isSelected: rest.text !== tagText ? isSelected : !isSelected,
+    }));
 
     setForm({ ...form, tags });
   }

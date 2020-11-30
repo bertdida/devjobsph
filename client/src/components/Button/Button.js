@@ -3,9 +3,7 @@ import { Button as BTButton } from 'react-bootstrap';
 
 import './Button.scss';
 
-export function Button({
-  children, className = null, ...rest
-}) {
+export function Button({ children, className = null, ...rest }) {
   return (
     <BTButton {...rest} className={`${className || ''} button`}>
       {children}
