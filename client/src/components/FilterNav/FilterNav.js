@@ -7,7 +7,6 @@ import api from 'common/api';
 import { Button } from 'components/Button';
 import { Loader } from 'components/Loader';
 import { FormPills } from './FormPills';
-
 import './FilterNav.scss';
 
 export function FilterNav() {
