@@ -6,3 +6,5 @@
 
 devjobsph.code-workspace
 .env
+
+**/debug.log
