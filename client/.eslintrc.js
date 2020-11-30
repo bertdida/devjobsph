@@ -18,6 +18,7 @@ module.exports = {
   },
   plugins: [
     'react',
+    'react-hooks',
   ],
   rules: {
     'import/prefer-default-export': 'off',
@@ -28,6 +29,8 @@ module.exports = {
     'no-underscore-dangle': ['error', { allow: ['_id'] }],
     camelcase: 'off',
     'react/jsx-props-no-spreading': 'off',
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
   },
   settings: {
     'import/resolver': {
