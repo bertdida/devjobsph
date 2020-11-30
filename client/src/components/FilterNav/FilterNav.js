@@ -14,7 +14,7 @@ export function FilterNav() {
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(true);
   const [isShown, setIsShown] = useState(false);
-  const [form, setForm] = useState({ tags: [] });
+  const [form, setForm] = useState({ tags: null });
 
   const { location } = history;
   const { search, pathname } = location;
@@ -38,7 +38,7 @@ export function FilterNav() {
   }, [history]);
 
   useEffect(() => {
-    if (form.tags.length) {
+    if (form.tags !== null) {
       return;
     }
 
