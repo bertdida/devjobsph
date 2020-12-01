@@ -1,14 +1,19 @@
+body[data-theme="dark"] {
+  .pagination__link {
+    --hover-background-color: rgba(255, 255, 255, 0.2);
+  }
+}
+
 .pagination {
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  &__nav {
-    color: inherit;
-    text-decoration: none;
+  &__link {
+    --hover-background-color: rgba(0, 0, 0, 0.1);
 
     &:hover {
-      color: inherit;
+      background-color: var(--hover-background-color);
     }
   }
 }
