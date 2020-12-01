@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { Button as BTButton } from 'react-bootstrap';
+import clsx from 'clsx';
 
 import './Button.scss';
 
@@ -10,7 +11,11 @@ export function Button({
     <BTButton
       {...rest}
       variant={variant}
-      className={`${className ? `${className} ` : ''}button`}
+      className={clsx({
+        [className]: className,
+        button: true,
+        'button--secondary': !variant,
+      })}
     >
       {children}
     </BTButton>

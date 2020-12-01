@@ -8,12 +8,4 @@ body[data-theme="dark"] {
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  &__link {
-    --hover-background-color: rgba(0, 0, 0, 0.1);
-
-    &:hover {
-      background-color: var(--hover-background-color);
-    }
-  }
 }
