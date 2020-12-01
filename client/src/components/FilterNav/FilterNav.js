@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import queryString from 'query-string';
 import { useHistory } from 'react-router-dom';
+import clsx from 'clsx';
 
 import api from 'common/api';
 import { Button } from 'components/Button';
@@ -124,7 +125,11 @@ export function FilterNav() {
         All Filters
       </Button>
 
-      <div className={`filterNav ${isShown ? 'filterNav--show' : ''}`}>
+      <div className={clsx({
+        filterNav: true,
+        'filterNav--show': isShown,
+      })}
+      >
         <div className="header filterNav__header">
           <div className="header__inner">
             <h4 className="h5 mb-0">All jobs filters</h4>
