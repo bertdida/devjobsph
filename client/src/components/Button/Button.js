@@ -3,9 +3,15 @@ import { Button as BTButton } from 'react-bootstrap';
 
 import './Button.scss';
 
-export function Button({ children, className = null, ...rest }) {
+export function Button({
+  children, className = null, variant = null, ...rest
+}) {
   return (
-    <BTButton {...rest} className={`${className || ''} button`}>
+    <BTButton
+      {...rest}
+      variant={variant}
+      className={`${className ? `${className} ` : ''}button`}
+    >
       {children}
     </BTButton>
   );
@@ -14,8 +20,10 @@ export function Button({ children, className = null, ...rest }) {
 Button.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
+  variant: PropTypes.string,
 };
 
 Button.defaultProps = {
   className: null,
+  variant: null,
 };
