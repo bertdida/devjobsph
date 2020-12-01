@@ -44,7 +44,7 @@ function PaginationLink({ page, children }) {
   const url = `${pathname}?${params}`;
 
   return (
-    <Button variant={null} className="pagination__link" as={Link} to={url}>
+    <Button className="pagination__link" as={Link} to={url}>
       {children}
     </Button>
   );

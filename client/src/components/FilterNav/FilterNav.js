@@ -120,7 +120,7 @@ export function FilterNav() {
 
   return (
     <>
-      <Button size="sm mr-1" onClick={toggleNav}>
+      <Button variant="primary" size="sm mr-1" onClick={toggleNav}>
         All Filters
       </Button>
 
@@ -159,15 +159,15 @@ export function FilterNav() {
 
               <div className="filterNav__footer">
                 <div className="filterNav__buttonGroup">
-                  <Button variant={null} onClick={resetForm}>
+                  <Button onClick={resetForm}>
                     Reset
                   </Button>
                 </div>
 
-                <Button variant={null} className="mr-1" onClick={onCancel}>
+                <Button className="mr-1" onClick={onCancel}>
                   Cancel
                 </Button>
-                <Button onClick={onFormSubmit}>
+                <Button variant="primary" onClick={onFormSubmit}>
                   Apply
                 </Button>
               </div>
