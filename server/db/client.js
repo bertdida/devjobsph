@@ -30,6 +30,15 @@ async function getJobs({
     };
   }
 
+  if (rest.hasSalary !== null) {
+    conditions = {
+      ...conditions,
+      salary: {
+        [rest.hasSalary ? '$ne' : '$eq']: null,
+      },
+    };
+  }
+
   const totalDocs = await Job.countDocuments(conditions).exec();
   const totalPage = Math.ceil(totalDocs / perPage);
 

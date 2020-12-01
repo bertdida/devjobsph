@@ -11,6 +11,7 @@ router.get('/', async (req, res, next) => {
     perPage: yup.number().oneOf([10, 15, 20]).default(20),
     tag: yup.string().nullable().default(null),
     hasTag: yup.boolean().nullable().default(null),
+    hasSalary: yup.boolean().nullable().default(null),
   });
 
   try {
