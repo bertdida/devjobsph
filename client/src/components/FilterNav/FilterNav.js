@@ -17,6 +17,7 @@ export function FilterNav() {
   const [form, setForm] = useState({
     tags: null,
     requireTag: false,
+    requireSalary: false,
   });
 
   const { location } = history;
@@ -89,13 +90,14 @@ export function FilterNav() {
   function onFormSubmit(event) {
     event.preventDefault();
 
-    const { tags, requireTag } = form;
+    const { tags, requireTag, requireSalary } = form;
     const selectedTags = tags.filter(({ isSelected }) => isSelected);
 
     const selectedTagsTexts = selectedTags.map(({ text }) => text.toLowerCase());
     const params = queryString.stringify({
       tag: selectedTagsTexts,
       ...(requireTag ? { hasTag: true } : null),
+      ...(requireSalary ? { hasSalary: true } : null),
     });
 
     history.push({ pathname, search: `?${params}` });
@@ -156,6 +158,17 @@ export function FilterNav() {
                       name="requireTag"
                       label="Hide jobs without tags"
                       checked={form.requireTag}
+                      onChange={onChange}
+                    />
+                  </Form.Group>
+
+                  <Form.Group>
+                    <Form.Check
+                      type="switch"
+                      id="requireSalary"
+                      name="requireSalary"
+                      label="Hide jobs without salary"
+                      checked={form.requireSalary}
                       onChange={onChange}
                     />
                   </Form.Group>
