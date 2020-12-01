@@ -1,3 +1,9 @@
+body[data-theme="dark"] {
+  .darkModeToggle {
+    --hover-background-color: rgba(255, 255, 255, 0.2);
+  }
+}
+
 .header {
   border-bottom: 1px solid var(--border-color);
 
@@ -8,5 +14,21 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
+}
+
+.darkModeToggle {
+  --size: 35px;
+  --hover-background-color: rgba(0, 0, 0, 0.1);
+
+  height: var(--size);
+  width: var(--size);
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background-color: var(--hover-background-color);
   }
 }
