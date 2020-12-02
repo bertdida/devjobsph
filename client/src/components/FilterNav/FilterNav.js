@@ -110,14 +110,7 @@ export function FilterNav() {
   }
 
   function resetForm() {
-    const tags = form.tags.map((tag) => ({ ...tag, isSelected: false }));
-    history.push({ pathname, search: null });
-    setForm({
-      ...form,
-      tags,
-      requireTag: false,
-      requireSalary: false,
-    });
+    history.push({ pathname });
   }
 
   function onCancel() {
