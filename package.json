@@ -9,7 +9,8 @@
     "postinstall": "cd ./server && npm install && cd ../client && npm install ",
     "scrape": "npm run scrape --prefix server",
     "dev": "concurrently --kill-others \"npm run dev --prefix server\" \"npm run start --prefix client\"",
-    "lint": "concurrently \"npm run lint --prefix server\" \"npm run lint --prefix client\""
+    "lint": "concurrently \"npm run lint --prefix server\" \"npm run lint --prefix client\"",
+    "lint:fix": "concurrently \"npm run lint:fix --prefix server\" \"npm run lint:fix --prefix client\""
   },
   "repository": {
     "type": "git",
