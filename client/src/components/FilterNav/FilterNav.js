@@ -80,7 +80,7 @@ export function FilterNav() {
     setIsShown((prev) => !prev);
   }
 
-  function closeNav() {
+  function hideNav() {
     setIsShown(false);
   }
 
@@ -106,7 +106,7 @@ export function FilterNav() {
     });
 
     history.push({ pathname, search: `?${params}` });
-    closeNav();
+    hideNav();
   }
 
   function resetForm() {
@@ -115,7 +115,7 @@ export function FilterNav() {
 
   function onCancel() {
     parseQueryParams(search);
-    closeNav();
+    hideNav();
   }
 
   function onChange(event) {
