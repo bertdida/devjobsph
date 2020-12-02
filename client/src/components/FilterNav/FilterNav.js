@@ -57,7 +57,7 @@ export function FilterNav() {
 
   function parseQueryParams(query) {
     const currQuery = queryString.parse(query);
-    const { tag: tagQuery = '' } = currQuery;
+    const { tag: tagQuery = '', hasTag, hasSalary } = currQuery;
 
     const tagsQuery = Array.isArray(tagQuery) ? tagQuery : [tagQuery];
     const tagsQueryLower = tagsQuery.map((tag) => tag.toLowerCase());
@@ -67,7 +67,12 @@ export function FilterNav() {
         ...tag, isSelected: tagsQueryLower.includes(tag.text.toLowerCase()),
       }));
 
-      return { ...prev, tags };
+      return {
+        ...prev,
+        tags,
+        requireTag: Boolean(hasTag),
+        requireSalary: Boolean(hasSalary),
+      };
     });
   }
 
@@ -107,7 +112,12 @@ export function FilterNav() {
   function resetForm() {
     const tags = form.tags.map((tag) => ({ ...tag, isSelected: false }));
     history.push({ pathname, search: null });
-    setForm({ ...form, tags });
+    setForm({
+      ...form,
+      tags,
+      requireTag: false,
+      requireSalary: false,
+    });
   }
 
   function onCancel() {
