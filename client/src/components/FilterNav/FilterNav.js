@@ -126,7 +126,7 @@ export function FilterNav() {
 
   return (
     <>
-      <Button variant="primary" size="sm mr-1" onClick={toggleNav}>
+      <Button variant="primary" className="mr-1" size="sm" onClick={toggleNav}>
         All Filters
       </Button>
 
