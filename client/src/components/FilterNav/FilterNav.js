@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Form from 'react-bootstrap/Form';
 import queryString from 'query-string';
 import { useHistory } from 'react-router-dom';
@@ -7,10 +7,12 @@ import clsx from 'clsx';
 import api from 'common/api';
 import { Button } from 'components/Button';
 import { Loader } from 'components/Loader';
+import { useOnClickOutside } from 'common/hooks/useOnClickOutside';
 import { FormPills } from './FormPills';
 import './FilterNav.scss';
 
 export function FilterNav() {
+  const root = useRef();
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(true);
   const [isShown, setIsShown] = useState(false);
@@ -22,6 +24,8 @@ export function FilterNav() {
 
   const { location } = history;
   const { search, pathname } = location;
+
+  useOnClickOutside(root, hideNav);
 
   useEffect(() => {
     if (isLoading) {
@@ -130,10 +134,12 @@ export function FilterNav() {
         All Filters
       </Button>
 
-      <div className={clsx({
-        filterNav: true,
-        'filterNav--show': isShown,
-      })}
+      <div
+        ref={root}
+        className={clsx({
+          filterNav: true,
+          'filterNav--show': isShown,
+        })}
       >
         <div className="header filterNav__header">
           <div className="header__inner">
