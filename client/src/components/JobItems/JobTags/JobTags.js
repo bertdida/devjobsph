@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link, useHistory } from 'react-router-dom';
 
-import { useOnClickOutside } from './useOnClickOutside';
+import { useOnClickOutside } from 'common/hooks/useOnClickOutside';
 import './JobTags.scss';
 
 export function JobTags({ tags: tagsProp }) {
