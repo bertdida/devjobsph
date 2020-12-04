@@ -1,4 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
+import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
 import queryString from 'query-string';
 import { useHistory } from 'react-router-dom';
@@ -11,11 +13,17 @@ import { useOnClickOutside } from 'common/hooks/useOnClickOutside';
 import { FormPills } from './FormPills';
 import './FilterNav.scss';
 
-export function FilterNav() {
+export function FilterNav(props) {
+  return ReactDOM.createPortal(
+    <WrappedFilterNav {...props} />,
+    document.body,
+  );
+}
+
+function WrappedFilterNav({ show, onHide }) {
   const root = useRef();
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(true);
-  const [isShown, setIsShown] = useState(false);
   const [form, setForm] = useState({
     tags: null,
     requireTag: false,
@@ -25,7 +33,7 @@ export function FilterNav() {
   const { location } = history;
   const { search, pathname } = location;
 
-  useOnClickOutside(root, hideNav);
+  useOnClickOutside(root, onHide);
 
   useEffect(() => {
     if (isLoading) {
@@ -80,14 +88,6 @@ export function FilterNav() {
     });
   }
 
-  function toggleNav() {
-    setIsShown((prev) => !prev);
-  }
-
-  function hideNav() {
-    setIsShown(false);
-  }
-
   function onToggleTag(tagText) {
     const tags = form.tags.map(({ isSelected, ...rest }) => ({
       ...rest, isSelected: rest.text !== tagText ? isSelected : !isSelected,
@@ -110,7 +110,7 @@ export function FilterNav() {
     });
 
     history.push({ pathname, search: `?${params}` });
-    hideNav();
+    onHide();
   }
 
   function resetForm() {
@@ -119,7 +119,7 @@ export function FilterNav() {
 
   function onCancel() {
     parseQueryParams(search);
-    hideNav();
+    onHide();
   }
 
   function onChange(event) {
@@ -129,81 +129,80 @@ export function FilterNav() {
   }
 
   return (
-    <>
-      <Button variant="primary" className="mr-1" size="sm" onClick={toggleNav}>
-        All Filters
-      </Button>
-
-      <div
-        ref={root}
-        className={clsx({
-          filterNav: true,
-          'filterNav--show': isShown,
-        })}
-      >
-        <div className="header filterNav__header">
-          <div className="header__inner">
-            <h4 className="h5 mb-0">All jobs filters</h4>
-          </div>
+    <div
+      ref={root}
+      className={clsx({
+        filterNav: true,
+        'filterNav--show': show,
+      })}
+    >
+      <div className="header filterNav__header">
+        <div className="header__inner">
+          <h4 className="h5 mb-0">All jobs filters</h4>
         </div>
-
-        {isLoading
-          ? <MyLoader /> : (
-            <>
-              <div className="filterNav__body">
-                <Form>
-                  <Form.Group>
-                    <FormPills
-                      tags={form.tags}
-                      onToggleTag={onToggleTag}
-                      label="Tags"
-                    />
-                  </Form.Group>
-
-                  <Form.Group>
-                    <Form.Check
-                      type="switch"
-                      id="requireTag"
-                      name="requireTag"
-                      label="Hide jobs without tags"
-                      checked={form.requireTag}
-                      onChange={onChange}
-                    />
-                  </Form.Group>
-
-                  <Form.Group>
-                    <Form.Check
-                      type="switch"
-                      id="requireSalary"
-                      name="requireSalary"
-                      label="Hide jobs without salary"
-                      checked={form.requireSalary}
-                      onChange={onChange}
-                    />
-                  </Form.Group>
-                </Form>
-              </div>
-
-              <div className="filterNav__footer">
-                <div className="filterNav__buttonGroup">
-                  <Button onClick={resetForm}>
-                    Reset
-                  </Button>
-                </div>
-
-                <Button className="mr-1" onClick={onCancel}>
-                  Cancel
-                </Button>
-                <Button variant="primary" onClick={onFormSubmit}>
-                  Apply
-                </Button>
-              </div>
-            </>
-          )}
       </div>
-    </>
+
+      {isLoading
+        ? <MyLoader /> : (
+          <>
+            <div className="filterNav__body">
+              <Form>
+                <Form.Group>
+                  <FormPills
+                    tags={form.tags}
+                    onToggleTag={onToggleTag}
+                    label="Tags"
+                  />
+                </Form.Group>
+
+                <Form.Group>
+                  <Form.Check
+                    type="switch"
+                    id="requireTag"
+                    name="requireTag"
+                    label="Hide jobs without tags"
+                    checked={form.requireTag}
+                    onChange={onChange}
+                  />
+                </Form.Group>
+
+                <Form.Group>
+                  <Form.Check
+                    type="switch"
+                    id="requireSalary"
+                    name="requireSalary"
+                    label="Hide jobs without salary"
+                    checked={form.requireSalary}
+                    onChange={onChange}
+                  />
+                </Form.Group>
+              </Form>
+            </div>
+
+            <div className="filterNav__footer">
+              <div className="filterNav__buttonGroup">
+                <Button onClick={resetForm}>
+                  Reset
+                </Button>
+              </div>
+
+              <Button className="mr-1" onClick={onCancel}>
+                Cancel
+              </Button>
+              <Button variant="primary" onClick={onFormSubmit}>
+                Apply
+              </Button>
+            </div>
+          </>
+        )}
+    </div>
   );
 }
+
+WrappedFilterNav.propTypes = {
+  show: PropTypes.bool.isRequired,
+  onHide: PropTypes.func.isRequired,
+};
 
 function MyLoader() {
   return (

@@ -1,8 +1,8 @@
 import Container from 'react-bootstrap/Container';
 
-import { FilterNav } from 'components/FilterNav';
 import { Title } from 'components/Title';
 import { DarkModeToggle } from './DarkModeToggle';
+import { FilterNavToggle } from './FilterNavToggle';
 
 export function Header() {
   return (
@@ -11,7 +11,7 @@ export function Header() {
         <Title />
 
         <div>
-          <FilterNav />
+          <FilterNavToggle />
           <DarkModeToggle />
         </div>
       </Container>
