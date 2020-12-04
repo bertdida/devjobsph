@@ -129,73 +129,76 @@ function WrappedFilterNav({ show, onHide }) {
   }
 
   return (
-    <div
-      ref={root}
-      className={clsx({
-        filterNav: true,
-        'filterNav--show': show,
-      })}
-    >
-      <div className="header filterNav__header">
-        <div className="header__inner">
-          <h4 className="h5 mb-0">All jobs filters</h4>
+    <>
+      <div
+        ref={root}
+        className={clsx({
+          filterNav: true,
+          'filterNav--show': show,
+        })}
+      >
+        <div className="header filterNav__header">
+          <div className="header__inner">
+            <h4 className="h5 mb-0">All jobs filters</h4>
+          </div>
         </div>
-      </div>
 
-      {isLoading
-        ? <MyLoader /> : (
-          <>
-            <div className="filterNav__body">
-              <Form>
-                <Form.Group>
-                  <FormPills
-                    tags={form.tags}
-                    onToggleTag={onToggleTag}
-                    label="Tags"
-                  />
-                </Form.Group>
+        {isLoading
+          ? <MyLoader /> : (
+            <>
+              <div className="filterNav__body">
+                <Form>
+                  <Form.Group>
+                    <FormPills
+                      tags={form.tags}
+                      onToggleTag={onToggleTag}
+                      label="Tags"
+                    />
+                  </Form.Group>
 
-                <Form.Group>
-                  <Form.Check
-                    type="switch"
-                    id="requireTag"
-                    name="requireTag"
-                    label="Hide jobs without tags"
-                    checked={form.requireTag}
-                    onChange={onChange}
-                  />
-                </Form.Group>
+                  <Form.Group>
+                    <Form.Check
+                      type="switch"
+                      id="requireTag"
+                      name="requireTag"
+                      label="Hide jobs without tags"
+                      checked={form.requireTag}
+                      onChange={onChange}
+                    />
+                  </Form.Group>
 
-                <Form.Group>
-                  <Form.Check
-                    type="switch"
-                    id="requireSalary"
-                    name="requireSalary"
-                    label="Hide jobs without salary"
-                    checked={form.requireSalary}
-                    onChange={onChange}
-                  />
-                </Form.Group>
-              </Form>
-            </div>
-
-            <div className="filterNav__footer">
-              <div className="filterNav__buttonGroup">
-                <Button onClick={resetForm}>
-                  Reset
-                </Button>
+                  <Form.Group>
+                    <Form.Check
+                      type="switch"
+                      id="requireSalary"
+                      name="requireSalary"
+                      label="Hide jobs without salary"
+                      checked={form.requireSalary}
+                      onChange={onChange}
+                    />
+                  </Form.Group>
+                </Form>
               </div>
 
-              <Button className="mr-1" onClick={onCancel}>
-                Cancel
-              </Button>
-              <Button variant="primary" onClick={onFormSubmit}>
-                Apply
-              </Button>
-            </div>
-          </>
-        )}
-    </div>
+              <div className="filterNav__footer">
+                <div className="filterNav__buttonGroup">
+                  <Button onClick={resetForm}>
+                    Reset
+                  </Button>
+                </div>
+
+                <Button className="mr-1" onClick={onCancel}>
+                  Cancel
+                </Button>
+                <Button variant="primary" onClick={onFormSubmit}>
+                  Apply
+                </Button>
+              </div>
+            </>
+          )}
+      </div>
+      <div className="filterNav__overlay" />
+    </>
   );
 }
 

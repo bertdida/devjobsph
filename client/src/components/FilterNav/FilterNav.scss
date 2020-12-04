@@ -28,6 +28,11 @@ body[data-theme="dark"] {
 
   &--show {
     transform: translateX(0);
+
+    + .filterNav__overlay {
+      opacity: 1;
+      visibility: visible;
+    }
   }
 
   &__body,
@@ -63,5 +68,18 @@ body[data-theme="dark"] {
 
   &::-webkit-scrollbar {
     width: 16px;
+  }
+
+  &__overlay {
+    opacity: 0;
+    visibility: hidden;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: visibility 0.3s, opacity 0.3s;
   }
 }
