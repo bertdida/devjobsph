@@ -13,10 +13,12 @@ import { useOnClickOutside } from 'common/hooks/useOnClickOutside';
 import { FormPills } from './FormPills';
 import './FilterNav.scss';
 
+const documentBody = document.body;
+
 export function FilterNav(props) {
   return ReactDOM.createPortal(
     <WrappedFilterNav {...props} />,
-    document.body,
+    documentBody,
   );
 }
 
@@ -34,6 +36,14 @@ function WrappedFilterNav({ show, onHide }) {
   const { search, pathname } = location;
 
   useOnClickOutside(root, onHide);
+
+  useEffect(() => {
+    if (show) {
+      documentBody.classList.add('overflow-hidden');
+    } else {
+      documentBody.classList.remove('overflow-hidden');
+    }
+  }, [show]);
 
   useEffect(() => {
     if (isLoading) {
