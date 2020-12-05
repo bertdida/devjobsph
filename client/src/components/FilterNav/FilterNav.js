@@ -149,7 +149,7 @@ function WrappedFilterNav({ show, onHide }) {
       >
         <div className="header filterNav__header">
           <div className="header__inner">
-            <h4 className="h5 mb-0">All jobs filters</h4>
+            <h2 className="h5 mb-0">All jobs filters</h2>
           </div>
         </div>
 

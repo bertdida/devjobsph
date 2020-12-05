@@ -13,6 +13,7 @@ export function Footer() {
           href="https://github.com/bertdida/DevJobsPh"
           target="_blank"
           rel="noreferrer"
+          aria-label="GitHub"
         >
           <GitHubIcon />
         </a>

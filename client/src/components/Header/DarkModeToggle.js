@@ -9,7 +9,11 @@ export function DarkModeToggle() {
   const { isDarkMode, toggle } = useContext(ThemeContext);
 
   return (
-    <Button className="darkModeToggle" onClick={toggle}>
+    <Button
+      className="darkModeToggle"
+      aria-label="Toggle dark mode"
+      onClick={toggle}
+    >
       {isDarkMode ? <FaSun /> : <BsMoon />}
     </Button>
   );
