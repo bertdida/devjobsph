@@ -4,6 +4,11 @@ const yup = require('yup');
 const db = require('../db');
 
 const router = express.Router();
+const SOURCE_OPTIONS = [
+  'indeed',
+  'glassdoor',
+  'onlinejobs',
+];
 
 router.get('/', async (req, res, next) => {
   const schema = yup.object().shape({
@@ -12,6 +17,7 @@ router.get('/', async (req, res, next) => {
     tag: yup.string().nullable().default(null),
     hasTag: yup.boolean().nullable().default(null),
     hasSalary: yup.boolean().nullable().default(null),
+    source: yup.string().nullable().oneOf([...SOURCE_OPTIONS, null]).default(null),
   });
 
   try {

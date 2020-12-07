@@ -39,6 +39,15 @@ async function getJobs({
     };
   }
 
+  if (rest.source !== null) {
+    conditions = {
+      ...conditions,
+      url: {
+        $regex: RegExp(`^https://(?:www|ph).${rest.source}.(?:com|ph)/`, 'i'),
+      },
+    };
+  }
+
   const totalDocs = await Job.countDocuments(conditions).exec();
   const totalPage = Math.ceil(totalDocs / perPage);
 
