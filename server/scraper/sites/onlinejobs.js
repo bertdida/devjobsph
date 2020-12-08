@@ -35,6 +35,7 @@ async function scrapeJobs(jobTitle) {
 
     const $postedOn = $(element).find('p:contains("Posted on")');
     const [postedBy] = $postedOn.text().trim().split(' • ');
+    const postedAt = $postedOn.data('temp');
 
     const salary = $postedOn.next().text().trim();
     const urlRelative = $(element).find('> a').attr('href');
@@ -42,6 +43,7 @@ async function scrapeJobs(jobTitle) {
     return {
       title,
       postedBy,
+      postedAt,
       salary: salary || null,
       url: `${BASE_URL}${urlRelative}`,
     };
