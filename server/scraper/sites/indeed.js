@@ -38,17 +38,16 @@ async function scrapeJobsRecursively(url, results = [], page = 1) {
 
   const currResults = targets.map((_, element) => {
     const _jk = $(element).data('jk');
-    const title = $(element).find('.title a').attr('title').trim();
-    const postedBy = $(element).find('.company').text().trim();
-    const salary = $(element).find('.salaryText').text().trim();
-    const urlRelative = $(element).find('.title a').attr('href');
+    const title = $(element).find('.jobTitle [title]').text().trim();
+    const postedBy = $(element).find('.companyName').text().trim();
+    const salary = $(element).find('.salary-snippet').text().trim();
 
     return {
       _jk,
       title,
       postedBy,
       salary: salary || null,
-      url: `${BASE_URL}${urlRelative}`,
+      url: `${BASE_URL}/viewjob?jk=${_jk}`,
     };
   }).get();
 

@@ -47,14 +47,15 @@ async function scrapeJobsRecursively(url, results = [], page = 1) {
   const targets = $('.react-job-listing');
 
   const currResults = targets.map((_, element) => {
-    const title = $(element).find('.jobTitle').text().trim();
-    const postedBy = $(element).find('.jobHeader').text().trim();
-    const urlRelative = $(element).find('.jobHeader a').attr('href');
+    const title = $(element).find('[data-test=job-link]').text().trim();
+    const postedBy = $(element).find('.d-flex').slice(1, 2).find('.jobLink').text().trim(); // eslint-disable-line newline-per-chained-call
+    const salary = $(element).find('[data-test=detailSalary]').text().trim();
+    const urlRelative = $(element).find('[href^="/partner/jobListing.htm"]').attr('href');
 
     return {
       title,
       postedBy,
-      salary: null,
+      salary: salary || null,
       url: `${BASE_URL}${urlRelative}`,
     };
   }).get();
