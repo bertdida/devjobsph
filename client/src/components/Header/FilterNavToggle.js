@@ -16,7 +16,7 @@ export function FilterNavToggle() {
 
   return (
     <>
-      <Button variant="primary" className="mr-1" size="sm" onClick={onClick}>
+      <Button className="mr-1" size="sm" onClick={onClick}>
         All Filters
       </Button>
 

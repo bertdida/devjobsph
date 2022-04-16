@@ -12,9 +12,5 @@
 }
 
 .darkModeToggle {
-  --size: 35px;
-
-  height: var(--size);
-  width: var(--size);
-  padding: 0;
+  padding: 0 !important;
 }

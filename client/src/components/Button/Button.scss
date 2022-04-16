@@ -8,11 +8,17 @@ body[data-theme="dark"] {
 
 .button {
   --hover-background-color: rgba(0, 0, 0, 0.1);
+  --height: 40px;
 
-  border-radius: 40px;
+  border-radius: var(--height);
+  height: var(--height);
+  min-width: var(--height);
+  padding: 0 16px;
+  box-sizing: border-box;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  font-size: 1rem;
 
   path {
     stroke: inherit;

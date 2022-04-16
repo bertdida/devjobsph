@@ -4,6 +4,10 @@
   color: inherit;
 }
 
+body[data-theme="dark"] :focus {
+  outline-width: 2px !important;
+}
+
 body {
   --max-width: 700px;
   --header-height: 65px;

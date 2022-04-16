@@ -149,7 +149,7 @@ function WrappedFilterNav({ show, onHide }) {
       >
         <div className="header filterNav__header">
           <div className="header__inner">
-            <h2 className="h5 mb-0">All jobs filters</h2>
+            <h2 className="h5 mb-0">Filters</h2>
           </div>
         </div>
 
@@ -192,16 +192,16 @@ function WrappedFilterNav({ show, onHide }) {
 
               <div className="filterNav__footer">
                 <div className="filterNav__buttonGroup">
-                  <Button onClick={resetForm}>
-                    Reset
+                  <Button onClick={onCancel}>
+                    Cancel
                   </Button>
                 </div>
 
-                <Button className="mr-1" onClick={onCancel}>
-                  Cancel
+                <Button className="mr-2" onClick={resetForm}>
+                  Reset
                 </Button>
                 <Button variant="primary" onClick={onFormSubmit}>
-                  Apply
+                  Filter Jobs
                 </Button>
               </div>
             </>
