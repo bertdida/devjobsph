@@ -10,6 +10,7 @@ import api from 'common/api';
 import { Button } from 'components/Button';
 import { Loader } from 'components/Loader';
 import { useOnClickOutside } from 'common/hooks/useOnClickOutside';
+import { MdClose } from 'react-icons/md';
 import { FormPills } from './FormPills';
 import './FilterNav.scss';
 
@@ -192,8 +193,8 @@ function WrappedFilterNav({ show, onHide }) {
 
               <div className="filterNav__footer">
                 <div className="filterNav__buttonGroup">
-                  <Button onClick={onCancel}>
-                    Cancel
+                  <Button onClick={onCancel} className="p-0">
+                    <MdClose size={20} />
                   </Button>
                 </div>
 
@@ -201,7 +202,7 @@ function WrappedFilterNav({ show, onHide }) {
                   Reset
                 </Button>
                 <Button variant="primary" onClick={onFormSubmit}>
-                  Filter Jobs
+                  Apply Filter
                 </Button>
               </div>
             </>
