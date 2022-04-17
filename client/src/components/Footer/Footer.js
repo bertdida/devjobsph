@@ -1,7 +1,6 @@
 import Container from 'react-bootstrap/Container';
 
 import { GitHubIcon } from 'common/icons';
-import { Title } from 'components/Title';
 import './Footer.scss';
 
 export function Footer() {
@@ -18,7 +17,12 @@ export function Footer() {
           <GitHubIcon />
         </a>
 
-        <Title />
+        <div className="footer__by">
+          👨‍💻 by&nbsp;
+          <a className="footer__link" href="https://bertdida.github.io" target="_blank" rel="noreferrer">
+            bertdida
+          </a>
+        </div>
       </Container>
     </Container>
   );
