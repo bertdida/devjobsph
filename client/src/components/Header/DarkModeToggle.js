@@ -10,11 +10,12 @@ export function DarkModeToggle() {
 
   return (
     <Button
-      className="darkModeToggle"
+      className="p-0"
       aria-label="Toggle dark mode"
+      size="sm"
       onClick={toggle}
     >
-      {isDarkMode ? <FaSun /> : <BsMoon />}
+      {isDarkMode ? <FaSun size={18} /> : <BsMoon size={18} />}
     </Button>
   );
 }
