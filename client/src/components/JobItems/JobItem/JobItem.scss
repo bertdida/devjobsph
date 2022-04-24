@@ -29,7 +29,22 @@
   }
 
   &__postedBy,
-  &__salary {
+  &__salary,
+  &__source {
     color: var(--card-foreground-secondary-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__info {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 20px auto;
+    gap: 10px;
+
+    svg {
+      color: var(--card-foreground-secondary-color);
+    }
   }
 }

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import Card from 'react-bootstrap/Card';
-
+import { MdAttachMoney, MdBusiness, MdLanguage } from 'react-icons/md';
 import { JobTags } from '../JobTags';
 import './JobItem.scss';
 
@@ -24,8 +24,20 @@ export function JobItem({ job }) {
           <small className="jobItem__createdAt">{createdAtStr}</small>
         </div>
 
-        <Card.Subtitle className="jobItem__postedBy">{postedBy}</Card.Subtitle>
-        {salary && <Card.Text className="jobItem__salary">{salary}</Card.Text>}
+        <div className="jobItem__info">
+          <MdBusiness />
+          <Card.Text className="jobItem__postedBy">{postedBy}</Card.Text>
+        </div>
+        {salary && (
+          <div className="jobItem__info">
+            <MdAttachMoney />
+            <Card.Text className="jobItem__salary">{salary}</Card.Text>
+          </div>
+        )}
+        <div className="jobItem__info">
+          <MdLanguage />
+          <Card.Text className="jobItem__source">{getHostname(url)}</Card.Text>
+        </div>
       </Card.Body>
 
       {tags && tags.length > 0 && (
@@ -35,6 +47,10 @@ export function JobItem({ job }) {
       )}
     </Card>
   );
+}
+
+function getHostname(url) {
+  return new URL(url).hostname;
 }
 
 JobItem.propTypes = {
