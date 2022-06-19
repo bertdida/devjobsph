@@ -37,14 +37,10 @@ async function scrapeJobsRecursively(url, results = [], page = 1) {
   const targets = $('.result');
 
   const currResults = targets.map((_, element) => {
-    let _jk = $(element).data('jk');
+    const _jk = $(element).find('[data-jk]').data('jk').trim();
     const title = $(element).find('.jobTitle [title]').text().trim();
     const postedBy = $(element).find('.companyName').text().trim();
     const salary = $(element).find('.salary-snippet').text().trim();
-
-    if (_jk === undefined || !_jk.trim().length) {
-      _jk = $(element).attr('id').replace('job_', '');
-    }
 
     return {
       _jk,
