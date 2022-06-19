@@ -40,7 +40,7 @@ async function scrapeJobsRecursively(url, results = [], page = 1) {
     const _jk = $(element).find('[data-jk]').data('jk').trim();
     const title = $(element).find('.jobTitle [title]').text().trim();
     const postedBy = $(element).find('.companyName').text().trim();
-    const salary = $(element).find('.salary-snippet').text().trim();
+    const salary = $(element).find('.salary-snippet-container').text().trim();
 
     return {
       _jk,
