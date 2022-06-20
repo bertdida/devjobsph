@@ -24,6 +24,8 @@ async function scrapeJobs(dbCon) {
 
   try {
     await db.client.saveJobs(uniqueJobs, { ordered: false });
+  } catch (error) {
+    console.log(error);
   } finally {
     await dbCon.close();
     process.exit();
